@@ -363,8 +363,6 @@
   #jt{position:fixed;right:18px;top:22vh;height:56vh;width:24px;z-index:25;pointer-events:none}
   #jtl{position:absolute;left:11px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.35);border-radius:2px}
   #jtk{position:absolute;left:0;top:0;transform:translateY(-50%);filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
-  #toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,40px);z-index:60;opacity:0;visibility:hidden;background:#FFC21A;color:#0F1E4A;font:700 1rem 'Bricolage Grotesque',sans-serif;padding:12px 20px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:90vw;text-align:center}
-  .cf{position:fixed;z-index:61;width:12px;height:16px;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);pointer-events:none}
   #story{position:relative;z-index:1;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#F4F8FF}
   #story h1,#story h2,#story p{font-family:inherit;margin:0}
   #hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;color:#0F1E4A}
@@ -410,14 +408,6 @@
   #cockpit{position:relative;z-index:2;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
   #cockpit,#cockpit *{font-family:'Bricolage Grotesque',system-ui,sans-serif !important}
   #cockpit .phead,#cockpit .tabbar button,#cockpit h2,#cockpit .dklab b{letter-spacing:.04em !important}
-  #misBtn{position:relative}
-  #misPop{position:absolute;right:14px;bottom:100%;z-index:50;width:min(340px,92vw);background:#170e2e;border:2px solid #ffb84d;border-radius:16px;padding:14px 16px;box-shadow:0 -10px 30px rgba(0,0,0,.45)}
-  #misPop[hidden]{display:none}
-  #misPop h3{font-size:1rem;color:#ffb84d;margin:0 0 8px}
-  #misPop ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
-  #misPop li{display:flex;gap:10px;align-items:center;font-size:.92rem;color:#f3e8ff}
-  #misPop li i{width:22px;height:22px;border-radius:50%;border:2px solid #ffb84d;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;color:#1b1030;flex:none}
-  #misPop li.ok i{background:#ffb84d}#misPop li.ok span{text-decoration:line-through;opacity:.7}
   body.rm #acts,body.rm #land{background:#0B1230}
   body.rm .cap{position:static;opacity:1 !important;visibility:visible !important;transform:none !important;margin:0 5vw 24px}
   body.rm #acts{height:auto;padding:40px 0}body.rm #stage{position:relative;height:60vh}
@@ -496,16 +486,35 @@
   #cockpit #dock .seg{background:transparent;border-color:#fff;box-shadow:none}#cockpit #dock .seg button{color:#fff}#cockpit #dock .seg button[aria-pressed="true"]{background:var(--sun);color:var(--ink)}
   #cockpit #dock .ctl{border-color:rgba(255,255,255,.3)}#cockpit #dock .ctl .ttl,#cockpit #dock label,#cockpit #dock .k{color:#fff}
   #cockpit #dock input[type=number]{background:#fff}
-  #misPop{background:var(--ink,#0F1E4A);border:3px solid #FFC21A;box-shadow:4px 4px 0 #000}#misPop h3,#misPop li i{color:#FFC21A;border-color:#FFC21A}#misPop li.ok i{background:#FFC21A;color:#0F1E4A}
   #cockpit .sosov .note,#cockpit .sosov p,#cockpit .sosov label,#cockpit .sosov li,#cockpit .sosov div{color:#FFE3E7}#cockpit .sosov .btn{color:var(--ink)}
   #cockpit .screen .note,#cockpit .wtoast .note,#cockpit .watch .note{color:#B9C6EA}
+  .habsvg{width:100%;max-width:520px;height:auto;display:block;margin:8px auto}
+  @keyframes habspin{to{transform:rotate(360deg)}}@keyframes habflow{to{stroke-dashoffset:-24}}
+  .habfan{animation:habspin 3s linear infinite;transform-box:fill-box;transform-origin:center}.habflow{animation:habflow .5s linear infinite}
+  @media (prefers-reduced-motion:reduce){.habfan,.habflow{animation:none}}
+  .habst{display:flex;align-items:center;gap:10px;padding:10px 14px;border:3px solid #0F1E4A;border-radius:16px;background:#BDF2D0;box-shadow:3px 3px 0 #0F1E4A;margin:8px 0}.habst.l1{background:#FFE49A}.habst.l2{background:#FFB8C2}.habst .dot{margin:0}
+  .habgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
+  .habm{border:3px solid #0F1E4A;border-radius:14px;padding:8px 10px;background:#fff;display:flex;flex-direction:column;gap:2px;font-size:.78rem}.habm b{font-size:1.05rem}.habm .ok{color:#0B7A3B}.habm .bad{color:#C81E3A}
+  .habmq{border:3px dashed #0F1E4A;border-radius:14px;padding:8px 12px;margin:8px 0;font-size:.82rem;background:#F5FAFF}.habmq b{display:block;margin-bottom:4px}.habmq code{font:700 .74rem monospace;background:#FFE49A;border-radius:6px;padding:1px 6px;color:#0F1E4A}
+  .frcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  #tg1 .grid2{grid-template-columns:minmax(0,1fr);max-width:640px;margin:14px auto}
+  .habwrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+  .habL{position:sticky;top:0;z-index:2;background:#fff}.habR{min-width:0}.habh{margin:10px 0 2px;font-size:.8rem}
+  @media (max-width:760px){.habwrap{grid-template-columns:minmax(0,1fr)}.habL{position:static}}
+  #cockpit .habR .k,#cockpit .habR .vv,#cockpit .habR label{color:#0F1E4A}
+  .habL .habsvg{max-width:300px;margin:0 auto 4px}.habL .habgrid{grid-template-columns:1fr 1fr;gap:6px}.habL .habm{padding:5px 8px;font-size:.7rem}.habL .habm b{font-size:.9rem}.habL .habst{padding:6px 10px;font-size:.82rem;margin:4px 0}
+  #rBody:not(.showall) .secondary{display:none}#rBody:not(.showall) .grid2:not(:has(.card:not(.secondary))){display:none}
+  .morebtn{display:block;margin:12px auto}
+  .howto .nt,.howto .sep{display:none}
+  #dock .dkctl,#dock #dkTog{display:none}
+  header .mbar span:nth-child(n+4){display:none}
+  #cockpit #viewGround .card .row .k{color:#3F5486}
 </style>
 </head>
 <body>
 <div id="sky" aria-hidden="true"><div id="stars"></div><div id="marsglow"></div><div id="grain"></div></div>
 <div class="langfix"><button class="skip" id="skipBtn" type="button"><span class="en">Skip to simulator</span><span class="es">Ir al simulador</span></button><div class="seg" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div></div>
 <div id="jt" aria-hidden="true"><i id="jtl"></i><svg id="jtk" viewBox="-14 -16 28 34" width="24" height="29"><path d="M0 -14 L10 0 L0 16 L-10 0Z" fill="#fff"/><path d="M0 -14 L-10 0 L0 16Z" fill="#75AADB"/></svg></div>
-<div id="toast" role="status" aria-live="polite"></div>
 
 <div id="story">
   <section id="hero" aria-label="Barrilete Cósmico">
@@ -717,16 +726,11 @@
   </aside>
 
   <section class="panel" id="viewGround" aria-label="Mission Control">
-    <div class="phead earth"><span data-i18n="pEarth">MISSION CONTROL · EARTH</span><button class="advtog" id="advTog" type="button" aria-pressed="false"></button></div>
+    <div class="phead earth"><span data-i18n="pEarth">MISSION CONTROL · EARTH</span></div>
     <div class="tabbar" role="tablist" data-bar="g">
       <button type="button" role="tab" aria-selected="true" data-tab="tgR" data-i18n="tgRidge">RIDGE MODULES</button>
       <button type="button" role="tab" aria-selected="false" data-tab="tg1" data-i18n="tgOver">GROUND VIEW</button>
       <button type="button" role="tab" aria-selected="false" data-tab="tg0" data-i18n="tgAbout">THE PROJECT</button>
-      <button type="button" role="tab" aria-selected="false" class="adv" data-tab="tg2" data-i18n="tgTele">TELEMETRY</button>
-      <button type="button" role="tab" aria-selected="false" class="adv" data-tab="tg3" data-i18n="tgBand">WRISTBAND</button>
-      <button type="button" role="tab" aria-selected="false" class="adv" data-tab="tg4" data-i18n="tgSim">SIMULATION</button>
-      <button type="button" role="tab" aria-selected="false" class="adv" data-tab="tg5" data-i18n="tgShip">SHIP SYSTEMS</button>
-      <button type="button" role="tab" aria-selected="false" class="adv" data-tab="tg6" data-i18n="tgRef">REFERENCE</button>
     </div>
     <div class="tp" id="tg0" role="tabpanel">
       <div class="card"><h2 data-i18n="abH1">WHAT IT IS FOR</h2><p data-i18n="abP1"></p><ul data-i18n="abL1"></ul></div>
@@ -923,8 +927,9 @@
     <div class="dklab"><b data-i18n="dkT">LOAD DATA</b><span data-i18n="dkS">simulated input</span></div>
     <div class="dkbtns">
       <button class="btn dk" type="button" data-da="spe" data-i18n="dkSpe">☀ Solar storm</button>
-      <button class="btn dk" type="button" data-da="shelter" data-i18n="dkShel">🛡 Shelter</button>
       <button class="btn dk" type="button" data-da="pulse" data-i18n="dkPulse">❤ Pulse</button>
+      <button class="btn dk" type="button" data-da="night" data-i18n="dkNight">🌙 Night</button>
+      <button class="btn dk" type="button" data-da="crew" data-i18n="dkCrew">🤝 Crew</button>
       <button class="btn dk sos" type="button" data-da="sos" data-i18n="dkSos">SOS</button>
       <button class="btn dk ghost" type="button" data-da="calm" data-i18n="dkCalm">↺ Calm</button>
     </div>
@@ -933,10 +938,8 @@
         <div class="row"><label class="k" for="spd" data-i18n="speedL">Time speed</label>
           <select id="spd"><option value="1">×1</option><option value="30" selected>×30</option><option value="120">×120</option><option value="600">×600</option></select></div>
     </div>
-    <button class="btn dk ghost" id="misBtn" type="button" aria-expanded="false" aria-controls="misPop">🪁 <span id="misN">0</span>/5</button>
     <button class="btn dk ghost" id="dkTog" type="button" aria-expanded="false" aria-controls="dkDraw"><span class="o" data-i18n="dkMore">More controls ▴</span><span class="c" data-i18n="dkLess">Hide controls ▾</span></button>
   </div>
-  <div id="misPop" hidden><h3 data-i18n="misH">Missions</h3><ul id="misList"></ul><button class="btn dk ghost" id="misReset" type="button" data-i18n="misRestart" style="margin-top:10px;min-height:32px">Start over</button></div>
   <div class="dkdraw" id="dkDraw" hidden>
     <div class="dkgrid"><div>
     <section class="card" aria-label="Controls">
@@ -1463,7 +1466,7 @@ else if (typeof exports === 'object'){
     demoS:['All normal: one green LED on the wristband.','A solar flare is detected (simulated here; the real feed is NASA DONKI). Red alert: the wristband vibrates and asks to go to the Storm Shelter.','In the shelter the dose drops. The planner blocks outside tasks and reassigns them.','SOS: the offline clinical guide opens at once. No waiting for Earth.','Earth receives the alerts only now, 20 minutes later, and acknowledges them.','The acknowledgement travels back with another delay: cyan light on the wristband.'],
     bandH:'WRISTBAND LEDS', alH:'ALERTS & NOTIFICATIONS', nowH:'RIGHT NOW · WHAT TO DO', nowWhy:'Why? Show the body map',
     bandLeg:'<div class="lg"><span class="dot g"></span>Green, steady: all normal</div><div class="lg"><span class="dot y"></span>Yellow, slow blink: caution</div><div class="lg"><span class="dot r"></span>Red, fast blink: critical</div><div class="lg"><span class="dot" style="background:#5b8cff"></span>Blue, double blink: a procedure is due</div><div class="lg"><span class="dot c"></span>Cyan, pulsing: message from Earth</div><div class="lg"><span class="dot w"></span>White: suit synced (blinking yellow: suit link lost)</div><p class="note">Calm = one green LED. All LEDs red and fast = SOS emergency. Only the system with a problem lights up (heart, oxygen, temperature, glucose, mind, exercise, radiation), so the lights show where, not what. There is no screen and no text: the tablet says what is happening and what to do.</p><p class="note">Two vibrations only: ALERT (1, 2 or 3 pulls, stronger as priority rises) and REMINDER (two short taps).</p>',
-    tgRidge:'MODULES', simB:'SIMULATION', how1:'Load data in the dark blue bar', how2:'The astronaut reacts on board', how3:'Earth sees it after the delay', howNt:'Simulated data to show how each view behaves. Not a medical device.', dkT:'LOAD DATA', dkS:'simulated input', dkSpe:'☀ Storm', dkShel:'🛡 Shelter', dkPulse:'❤ Pulse', dkSos:'SOS', dkCalm:'↺ Calm', misH:'Missions', misRestart:'Start over', dkMore:'More controls ▴', dkLess:'Hide controls ▾', dkHelp:'Press a scenario. Left: what the astronaut gets. Right: what Earth gets, later.', tbSuit:'SUIT', suitL:'SUIT', sIn:'INSIDE', sSync:'SYNCING', sEva:'EVA',
+    tgRidge:'MODULES', simB:'SIMULATION', how1:'Load data in the dark blue bar', how2:'The astronaut reacts on board', how3:'Earth sees it after the delay', howNt:'Simulated data to show how each view behaves. Not a medical device.', dkT:'LOAD DATA', dkS:'simulated input', dkSpe:'☀ Storm', dkShel:'🛡 Shelter', dkPulse:'❤ Pulse', dkNight:'🌙 Night', dkCrew:'🤝 Crew', dkSos:'SOS', dkCalm:'↺ Calm', misH:'Missions', misRestart:'Start over', dkMore:'More controls ▴', dkLess:'Hide controls ▾', dkHelp:'Press a scenario. Left: what the astronaut gets. Right: what Earth gets, later.', tbSuit:'SUIT', suitL:'SUIT', sIn:'INSIDE', sSync:'SYNCING', sEva:'EVA',
     suitH:'SUIT LIGHTS', suitSync:'Suit synced', suitSyncB:'Alerts now appear as suit lights. Reminders paused.',
     suitLinkLost:'Suit link lost', suitLinkLostB:'Data is stored and will be sent when the link returns.', suitLinkBack:'Suit link restored',
     wEva:'EVA · SUIT SYNCED', wPaused:'Reminders paused during EVA', evaOn:'EVA in progress',
@@ -1474,11 +1477,11 @@ else if (typeof exports === 'object'){
     suitLeg:'<div class="lg"><span class="dot g"></span>Green, steady: normal</div><div class="lg"><span class="dot y"></span>Yellow, slow blink: caution, check</div><div class="lg"><span class="dot r"></span>Red, fast blink: critical, act now</div><div class="lg"><span class="dot c"></span>Cyan, pulses: information</div><div class="lg"><span class="dot w"></span>White sweep: suit syncing</div><p class="note">Position tells the signal: heart, drop = oxygen, thermometer, waves = link. Color and blink tell the priority. The wrist adds buzzes before the priority pattern: 1 heart, 2 oxygen, 3 temperature, 8 suit link (same numbering as the wristband).</p>',
 
     tgAbout:'THE PROJECT', abH1:'WHAT IT IS FOR', abH2:'HOW IT WORKS', abH3:'WHAT IT SOLVES',
-    abP1:'On long missions Earth cannot help in real time: a message can take about 20 minutes to arrive. This tool lets an astronaut follow their own health and know what to do next without waiting for Earth, while Mission Control follows from a distance.',
-    abL1:'<li><b>Five space hazards (RIDGE):</b> radiation, isolation, distance, altered gravity and a closed hostile environment each have a module with automatic actions: storm shelter alert and radiation budget, sleep and cognitive fatigue, onboard autonomy and SOS, bone and fluid countermeasures, air, filters and hygiene.</li><li><b>Self-assessment:</b> heart rate, blood pressure, blood oxygen, temperature, blood glucose, sleep, mood, exercise and a radiation index.</li><li><b>Guidance:</b> a traffic light (green, yellow, red) and plain-language steps for what to do.</li><li><b>Routine:</b> reminders for measurements, blood samples and mental-health checks.</li><li><b>Ground support:</b> Mission Control receives a delayed copy, manages the schedule and acknowledges alerts.</li>',
-    abL2:'<li><b>Collect:</b> sensors and devices provide vitals; the astronaut adds manual measurements and a short check-in. In this prototype a simulator stands in for them.</li><li><b>Store on board:</b> every reading is saved in a database on the spacecraft (SQLite), so nothing depends on Earth.</li><li><b>Compare with the astronaut’s own baseline:</b> each value is judged against that person’s normal, not a fixed number.</li><li><b>Decide:</b> a traffic light per indicator and overall. The worst indicator sets the level and several yellows together raise it to red.</li><li><b>Inform:</b> the wristband has no screen: LEDs and vibration signal alerts and reminders; the tablet gives details and guides the procedures and tests.</li><li><b>Send to Earth:</b> copies travel with the delay (store and forward). Mission Control sees the past, sets the schedule and sends advice that also takes one delay to arrive.</li>',
-    abL3:'<li><b>The delay:</b> the astronaut decides and acts first and reports afterwards. Earth is a second observer.</li><li><b>Communication blackouts:</b> data keeps being stored on board and is sent when the link returns.</li><li><b>Late detection:</b> small deviations from a personal baseline show up before they become a problem.</li><li><b>Forgotten routines:</b> wristband reminders for procedures, tests and samples.</li><li><b>Mental health:</b> short mood, anxiety and focus checks, with a clear way to ask for support.</li><li><b>Information overload:</b> a simple traffic light instead of a wall of numbers.</li><li><b>Context for Earth:</b> Ground always sees how old the data is.</li><li><b>Spacewalks (EVA):</b> when the suit is put on it syncs with the wristband and alerts become lights: color shows the priority and position shows the signal, so no text is needed.</li>',
-    abNote:'Prototype with simulated data. It is an educational tool, not a medical device: thresholds and texts are examples that flight surgeons would need to validate.',
+    abP1:'Far from Earth, help can take 20 minutes to answer. This tool lets the astronaut watch their own health and know what to do without waiting, while Mission Control follows later.',
+    abL1:'<li>The astronaut decides first.</li><li>Earth is informed one delay later.</li><li>Everything works without internet on board.</li>',
+    abL2:'<li><b>Sense:</b> pulse, oxygen, sleep, radiation and more.</li><li><b>Decide on board:</b> a traffic light and what to do.</li><li><b>Act:</b> the body can even run the ship (fan, light, temperature).</li><li><b>Inform Earth:</b> a delayed copy, with no names.</li>',
+    abL3:'<li><b>Slow help:</b> the crew acts first.</li><li><b>Silent dangers:</b> a CO2 bubble while sleeping.</li><li><b>Isolation:</b> crew tension is spotted and softened in private.</li><li><b>No link:</b> data is kept and sent later.</li>',
+    abNote:'Prototype with simulated data. Not a medical device.',
  moreH:'HEALTH DETAILS (OPTIONAL)', pAstro:'ASTRONAUT · ON BOARD', pEarth:'MISSION CONTROL · EARTH', tbWrist:'WRISTBAND', tbTablet:'TABLET', tgOver:'EARTH SEES', tgTele:'TELEMETRY', tgBand:'WRISTBAND', tgSim:'TREND', tgShip:'SHIP SYSTEMS', tgRef:'REFERENCE', procH:'PROCEDURES & TESTS · TABLET', procLead:'The wristband only informs. The astronaut completes requested procedures and tests here, on the tablet.',
     wOnTablet:'Complete on the tablet',
     mgH:'WRISTBAND MANAGEMENT', mgLead:'The wristband only shows lights and vibrates. Ground sets the schedule, requests procedures and tests, and acknowledges alerts. Every command reaches the ship one delay later.',
@@ -1495,7 +1498,7 @@ else if (typeof exports === 'object'){
     demoS:['Todo normal: un solo LED verde en la pulsera.','Se detecta una fulguración solar (simulada acá; la fuente real es NASA DONKI). Alerta roja: la pulsera vibra y pide ir al Storm Shelter.','En el refugio baja la dosis. El planificador bloquea las tareas exteriores y las reasigna.','SOS: la guía clínica offline se abre al instante. Sin esperar a la Tierra.','La Tierra recibe las alertas recién ahora, 20 minutos después, y da acuse.','El acuse vuelve con otra demora: luz cian en la pulsera.'],
     bandH:'LEDS DE LA PULSERA', alH:'ALERTAS Y NOTIFICACIONES', nowH:'AHORA · QUÉ HACER', nowWhy:'¿Por qué? Ver el mapa del cuerpo',
     bandLeg:'<div class="lg"><span class="dot g"></span>Verde, fijo: todo normal</div><div class="lg"><span class="dot y"></span>Amarillo, parpadeo lento: precaución</div><div class="lg"><span class="dot r"></span>Rojo, parpadeo rápido: crítico</div><div class="lg"><span class="dot" style="background:#5b8cff"></span>Azul, doble destello: toca un procedimiento</div><div class="lg"><span class="dot c"></span>Cian, pulsante: mensaje de la Tierra</div><div class="lg"><span class="dot w"></span>Blanco: traje sincronizado (amarillo parpadeante: enlace con el traje perdido)</div><p class="note">En calma hay un solo LED verde. Todos los LED rojos y rápidos = emergencia SOS. Solo se enciende el sistema con problema (corazón, oxígeno, temperatura, glucosa, mente, ejercicio, radiación), así que las luces muestran dónde, no qué. No hay pantalla ni texto: la tablet dice qué pasa y qué hacer.</p><p class="note">Solo dos vibraciones: ALERTA (1, 2 o 3 tirones, más fuerte cuanto mayor la prioridad) y RECORDATORIO (dos toques cortos).</p>',
-    tgRidge:'MÓDULOS', simB:'SIMULACIÓN', how1:'Cargá datos en la barra azul de abajo', how2:'El astronauta reacciona a bordo', how3:'La Tierra lo ve tras la demora', howNt:'Datos simulados para mostrar cómo se comporta cada vista. No es un dispositivo médico.', dkT:'CARGA DE DATOS', dkS:'entrada simulada', dkSpe:'☀ Tormenta', dkShel:'🛡 Refugio', dkPulse:'❤ Pulso', dkSos:'SOS', dkCalm:'↺ Calma', misH:'Misiones', misRestart:'Empezar de nuevo', dkMore:'Más controles ▴', dkLess:'Ocultar controles ▾', dkHelp:'Tocá un escenario. Izquierda: lo que recibe el astronauta. Derecha: lo que recibe la Tierra, después.', tbSuit:'TRAJE', suitL:'TRAJE', sIn:'EN NAVE', sSync:'SINCRONIZANDO', sEva:'EVA',
+    tgRidge:'MÓDULOS', simB:'SIMULACIÓN', how1:'Cargá datos en la barra azul de abajo', how2:'El astronauta reacciona a bordo', how3:'La Tierra lo ve tras la demora', howNt:'Datos simulados para mostrar cómo se comporta cada vista. No es un dispositivo médico.', dkT:'CARGA DE DATOS', dkS:'entrada simulada', dkSpe:'☀ Tormenta', dkShel:'🛡 Refugio', dkPulse:'❤ Pulso', dkNight:'🌙 Noche', dkCrew:'🤝 Equipo', dkSos:'SOS', dkCalm:'↺ Calma', misH:'Misiones', misRestart:'Empezar de nuevo', dkMore:'Más controles ▴', dkLess:'Ocultar controles ▾', dkHelp:'Tocá un escenario. Izquierda: lo que recibe el astronauta. Derecha: lo que recibe la Tierra, después.', tbSuit:'TRAJE', suitL:'TRAJE', sIn:'EN NAVE', sSync:'SINCRONIZANDO', sEva:'EVA',
     suitH:'LUCES DEL TRAJE', suitSync:'Traje sincronizado', suitSyncB:'Las alertas ahora se ven como luces del traje. Recordatorios en pausa.',
     suitLinkLost:'Enlace con el traje perdido', suitLinkLostB:'Los datos se guardan y se envían cuando vuelva el enlace.', suitLinkBack:'Enlace con el traje restablecido',
     wEva:'EVA · TRAJE SINCRONIZADO', wPaused:'Recordatorios en pausa durante la EVA', evaOn:'EVA en curso',
@@ -1506,11 +1509,11 @@ else if (typeof exports === 'object'){
     suitLeg:'<div class="lg"><span class="dot g"></span>Verde, fija: normal</div><div class="lg"><span class="dot y"></span>Amarillo, parpadeo lento: precaución, revisar</div><div class="lg"><span class="dot r"></span>Rojo, parpadeo rápido: crítico, actuar ya</div><div class="lg"><span class="dot c"></span>Cian, pulsos: información</div><div class="lg"><span class="dot w"></span>Barrido blanco: traje sincronizando</div><p class="note">La posición indica la señal: corazón, gota = oxígeno, termómetro, ondas = enlace. El color y el parpadeo indican la prioridad. La muñeca suma vibraciones antes del patrón de prioridad: 1 corazón, 2 oxígeno, 3 temperatura, 8 enlace del traje (misma numeración que la pulsera).</p>',
 
     tgAbout:'EL PROYECTO', abH1:'PARA QUÉ SIRVE', abH2:'CÓMO FUNCIONA', abH3:'QUÉ SOLUCIONA',
-    abP1:'En misiones largas la Tierra no puede ayudar en tiempo real: un mensaje puede tardar unos 20 minutos en llegar. Esta herramienta permite al astronauta seguir su propia salud y saber qué hacer sin esperar a la Tierra, mientras Control de Misión acompaña a distancia.',
-    abL1:'<li><b>Cinco riesgos del espacio (RIDGE):</b> radiación, aislamiento, distancia, gravedad alterada y entorno cerrado hostil tienen cada uno un módulo con acciones automáticas: alerta de refugio y presupuesto de radiación, sueño y fatiga cognitiva, autonomía a bordo y SOS, contramedidas óseas y de fluidos, aire, filtros e higiene.</li><li><b>Autoevaluación:</b> pulso, presión arterial, oxígeno en sangre, temperatura, glucosa, sueño, ánimo, ejercicio e índice de radiación.</li><li><b>Orientación:</b> un semáforo (verde, amarillo, rojo) y pasos en lenguaje simple sobre qué hacer.</li><li><b>Rutina:</b> recordatorios de mediciones, muestras de sangre y chequeos de salud mental.</li><li><b>Apoyo desde Tierra:</b> Control de Misión recibe una copia demorada, gestiona el cronograma y da acuse de las alertas.</li>',
-    abL2:'<li><b>Reúne:</b> sensores y dispositivos aportan los signos vitales; el astronauta suma mediciones manuales y un check-in corto. En este prototipo los reemplaza un simulador.</li><li><b>Guarda a bordo:</b> cada lectura se almacena en una base de datos en la nave (SQLite), así nada depende de la Tierra.</li><li><b>Compara con la línea base propia:</b> cada valor se juzga contra el normal de esa persona, no contra un número fijo.</li><li><b>Decide:</b> un semáforo por indicador y uno general. El peor indicador define el nivel y varios amarillos juntos lo suben a rojo.</li><li><b>Informa:</b> la pulsera no tiene pantalla: LEDs y vibración avisan alertas y recordatorios; la tablet da los detalles y guía los procedimientos y tests.</li><li><b>Envía a la Tierra:</b> las copias viajan con la demora (almacenar y reenviar). Control de Misión ve el pasado, define el cronograma y envía consejos que también tardan una demora en llegar.</li>',
-    abL3:'<li><b>La demora:</b> el astronauta decide y actúa primero e informa después. La Tierra es un segundo observador.</li><li><b>Cortes de comunicación:</b> los datos se siguen guardando a bordo y se envían cuando vuelve el enlace.</li><li><b>Detección tardía:</b> los desvíos pequeños respecto de la línea base personal aparecen antes de volverse un problema.</li><li><b>Rutinas olvidadas:</b> recordatorios en la pulsera para procedimientos, tests y muestras.</li><li><b>Salud mental:</b> chequeos breves de ánimo, ansiedad y foco, con una forma clara de pedir apoyo.</li><li><b>Exceso de información:</b> un semáforo simple en lugar de una pared de números.</li><li><b>Contexto para la Tierra:</b> Control de Misión siempre ve qué antigüedad tienen los datos.</li><li><b>Caminatas espaciales (EVA):</b> al ponerse el traje, este se sincroniza con la pulsera y las alertas pasan a ser luces: el color indica la prioridad y la posición indica la señal, sin necesidad de texto.</li>',
-    abNote:'Prototipo con datos simulados. Es una herramienta educativa, no un dispositivo médico: los umbrales y los textos son ejemplos que deberían validar cirujanos de vuelo.',
+    abP1:'Lejos de la Tierra, la ayuda puede tardar 20 minutos en responder. Esta herramienta permite al astronauta cuidar su salud y saber qué hacer sin esperar, mientras Control de Misión acompaña después.',
+    abL1:'<li>El astronauta decide primero.</li><li>La Tierra se entera una demora después.</li><li>Todo funciona sin internet a bordo.</li>',
+    abL2:'<li><b>Mide:</b> pulso, oxígeno, sueño, radiación y más.</li><li><b>Decide a bordo:</b> semáforo y qué hacer.</li><li><b>Actúa:</b> el cuerpo puede manejar la nave (ventilador, luz, temperatura).</li><li><b>Informa a la Tierra:</b> una copia demorada, sin nombres.</li>',
+    abL3:'<li><b>Ayuda lenta:</b> la tripulación actúa primero.</li><li><b>Peligros silenciosos:</b> una burbuja de CO2 al dormir.</li><li><b>Aislamiento:</b> la tensión del equipo se detecta y se suaviza en privado.</li><li><b>Sin enlace:</b> los datos se guardan y se envían después.</li>',
+    abNote:'Prototipo con datos simulados. No es un dispositivo médico.',
  moreH:'DETALLES DE SALUD (OPCIONAL)', pAstro:'ASTRONAUTA · A BORDO', pEarth:'CONTROL DE MISIÓN · TIERRA', tbWrist:'PULSERA', tbTablet:'TABLET', tgOver:'LA TIERRA VE', tgTele:'TELEMETRÍA', tgBand:'PULSERA', tgSim:'TENDENCIA', tgShip:'SISTEMAS DE LA NAVE', tgRef:'REFERENCIA', procH:'PROCEDIMIENTOS Y TESTS · TABLET', procLead:'La pulsera solo informa. El astronauta completa acá, en la tablet, los procedimientos y tests que se le piden.',
     wOnTablet:'Completar en la tablet',
     mgH:'GESTIÓN DE LA PULSERA', mgLead:'La pulsera solo muestra luces y vibra. La Tierra define el cronograma, pide procedimientos y tests, y da acuse de recibo de las alertas. Cada comando llega a la nave una demora después.',
@@ -1830,10 +1833,11 @@ else if (typeof exports === 'object'){
     document.querySelectorAll('[data-i18n]').forEach(function (el) { var k = el.getAttribute('data-i18n'); if (T[l][k] !== undefined) el.innerHTML = T[l][k]; });
     $('howList').innerHTML = T[l].how.map(function (x) { return '<li>' + x + '</li>'; }).join('');
     document.querySelectorAll('.seg [data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
-    buildRidge(); advUpd(); if (typeof misRender === 'function') misRender();
+
     fillSelect(); fillGround(); buildMgmt(); $('hapState').textContent = navigator.vibrate ? t('hapOn') : t('hapOff');
-    try { localStorage.setItem('bc2-lang', l); } catch (e) {}
+    try { localStorage.setItem("bc2-lang", l); } catch (e) {}
     render();
+    try { if (RG.hab) buildRidge(); } catch (e) {}
   }
 
 
@@ -2565,6 +2569,13 @@ else if (typeof exports === 'object'){
     if (L.ex > 0) rec('G', L.ex, qq('Exercise ' + S.v.ex + ' of 120 min: resistive and aerobic work slows bone and muscle loss.', 'Ejercicio ' + S.v.ex + ' de 120 min: el trabajo resistivo y aeróbico frena la pérdida de hueso y músculo.'));
     if (TS.lbnp && TS.lbnp.pending) rec('G', 0, qq('LBNP and thigh compression session due (eases pressure on the eyes).', 'Toca la sesión de LBNP y compresión en muslos (alivia la presión en los ojos).'));
     if (RG.coordOk === false) rec('G', 1, qq('Coordination is below your standard: manual controls are not cleared. Rest and repeat the test.', 'La coordinación está por debajo de tu estándar: no estás habilitado para controles manuales. Descansá y repetí el test.'), 'coord');
+    // ---- E: habitat empatico
+    var HB = RG.hab;
+    if (HB.sleep && HB.ph === 'esc') rec('E', 2, qq('CO2 is building up at the head and the ship could not clear it. Wake the astronaut gently and open the vents.', 'El CO2 se acumula en la cabeza y la nave no pudo despejarlo. Despertá al astronauta con suavidad y abrí las salidas de aire.'), 'hab');
+    else if (HB.sleep && HB.ph === 'detected') rec('E', 0, qq('Habitat: CO2 pocket at the head handled automatically. You were not woken.', 'Hábitat: bolsa de CO2 en la cabeza resuelta automáticamente. No se te despertó.'));
+    // ---- I: friccion de la tripulacion (anonima)
+    if (RG.fr.idx >= 65) rec('I', 1, qq('Crew tension is high: please take part in the shared activity. Shifts were adjusted for everyone.', 'La tensión de la tripulación es alta: sumate a la actividad compartida. Los turnos se ajustaron para todos.'), 'fr');
+    else if (RG.fr.idx >= 35) rec('I', 0, qq('Crew: a calm shared activity is planned (Veggie garden).', 'Tripulación: hay una actividad compartida y tranquila (huerta Veggie).'));
     // ---- E: entorno cerrado
     var a = RG.air, flowLow = a.flow < 0.05;
     RG.fan = ((a.asleep && flowLow) || a.co2 > 5000) ? 1.5 : 1;
@@ -2637,8 +2648,119 @@ else if (typeof exports === 'object'){
     RG.hepa.h += dt / 3600; RG.wl.h += dt / 3600;
     if (RG.vr && CLK.sim - RG.vr.t0 >= 900) { RG.vr = null; decide(qq('Isolation: 15-minute VR session completed.', 'Aislamiento: sesión de VR de 15 minutos completada.')); }
     var prev = RG.recs.length + ':' + RG.radLvl + ':' + RG.modLvl;
+    habStep(dt); frStep(dt);
     rEval(); rUpd();
     if (prev !== RG.recs.length + ':' + RG.radLvl + ':' + RG.modLvl) { render(); renderWatch(true); }
+  }
+
+  /* ===== HABITAT EMPATICO: el cuerpo maneja la nave (simulado) ===== */
+  function habNew() { return { sleep:false, auto:true, head:800, cab:800, src:1.8, need:180, fan:20, fanCmd:false, rr:13, pulse:54, hrv:62, temp:21.5, cct:3000, sym:0, ph:'idle', msgs:[], det:0 }; }
+  function frNew() { return { alone:0, stress:0, together:90, idx:0, acts:0, plan:[], sent:false }; }
+  RG.hab = habNew(); RG.fr = frNew();
+  function habPub(topic, payload) { RG.hab.msgs.unshift({ t:CLK.sim, topic:topic, payload:payload }); if (RG.hab.msgs.length > 6) RG.hab.msgs.pop(); }
+  function habStep(dt) {
+    var H = RG.hab, n = Math.max(1, Math.ceil(dt / 20)), i;
+    for (i = 0; i < n; i++) {
+      var d = dt / n, coef = 0.0002 + (H.fanCmd ? 0.0062 : 0), src = H.sleep ? H.src : 0, ex = H.sleep ? 0 : 0.006;
+      H.head += (src - coef * (H.head - H.cab) - ex * (H.head - H.cab)) * d; H.head = Math.max(H.cab, Math.min(7000, H.head));
+      var s = Math.max(0, Math.min(1, (H.head - 1200) / 2500)), k = 1 - Math.exp(-d / 60);
+      H.rr += (13 + 7 * s - H.rr) * k; H.pulse += (54 + 18 * s - H.pulse) * k; H.hrv += (62 - 28 * s - H.hrv) * k;
+      if (H.sleep && H.rr >= 16 && H.pulse >= 62 && H.hrv <= 50) H.sym += d; else H.sym = Math.max(0, H.sym - d);
+      if (H.sleep && H.ph !== 'detected' && H.ph !== 'esc' && H.sym >= H.need) {
+        H.det = CLK.sim;
+        if (H.auto) {
+          H.ph = 'detected'; H.fanCmd = true; H.cct = 1800; H.temp = 20;
+          habPub('habitat/cabin2/fan', '{"speed":100,"mode":"sweep"}'); habPub('habitat/cabin2/light', '{"cct":1800,"lux":1}'); habPub('habitat/cabin2/temp', '{"set":20.0}');
+          decide(qq('Habitat: body signals match a CO2 pocket at the head. Fan sweep, amber light and a cooler room were sent automatically. The astronaut was not woken.', 'Hábitat: las señales del cuerpo coinciden con una bolsa de CO2 en la cabeza. Se enviaron solos el barrido del ventilador, luz ámbar y cuarto más fresco. No se despertó al astronauta.'));
+        }
+      }
+      if (H.sleep && H.head >= 5000 && H.ph !== 'esc') H.ph = 'esc';
+      if (H.ph === 'detected' && H.head < H.cab + 400) {
+        H.ph = 'cleared'; H.fanCmd = false; H.sym = 0; habPub('habitat/cabin2/fan', '{"speed":20,"mode":"normal"}');
+        decide(qq('Habitat: the CO2 bubble is gone. Fan back to normal.', 'Hábitat: la burbuja de CO2 se fue. Ventilador de nuevo en modo normal.'));
+      }
+      if (H.ph === 'esc' && H.head < 3000) H.ph = 'idle';
+      if (!H.sleep && H.fanCmd && H.head < H.cab + 200) H.fanCmd = false;
+    }
+  }
+  function habSvg(H) {
+    var s = Math.max(0, Math.min(1, (H.head - 1200) / 2500)), led = H.cct <= 2000 ? '#FFB347' : '#FFE2A8', rx = Math.round(22 + 46 * s), ry = Math.round(18 + 34 * s), op = (0.12 + 0.33 * s).toFixed(2);
+    var spin = H.fanCmd ? '0.5s' : '3s', sw = H.fanCmd ? '<path d="M64 84 H112" stroke="#1747B5" stroke-width="3" stroke-dasharray="6 6" class="habflow"/><path d="M64 98 H112" stroke="#1747B5" stroke-width="3" stroke-dasharray="6 6" class="habflow"/>' : '';
+    return '<svg class="habsvg" viewBox="0 0 360 170" role="img" aria-label="' + qq('Sleeping cabin: CO2 bubble around the head, fan, light and wall sensor', 'Cabina de descanso: burbuja de CO2 en la cabeza, ventilador, luz y sensor de pared') + '">' +
+      '<rect x="4" y="4" width="352" height="162" rx="18" fill="#EAF5FF" stroke="#0F1E4A" stroke-width="3"/><rect x="24" y="14" width="312" height="9" rx="4" fill="' + led + '" stroke="#0F1E4A" stroke-width="2"/>' +
+      '<g transform="translate(40 91)"><circle r="24" fill="#fff" stroke="#0F1E4A" stroke-width="3"/><g class="habfan" style="animation-duration:' + spin + '"><ellipse cx="0" cy="-11" rx="6" ry="10" fill="#75AADB" stroke="#0F1E4A" stroke-width="2"/><ellipse cx="9.5" cy="5.5" rx="6" ry="10" fill="#75AADB" stroke="#0F1E4A" stroke-width="2" transform="rotate(120 9.5 5.5)"/><ellipse cx="-9.5" cy="5.5" rx="6" ry="10" fill="#75AADB" stroke="#0F1E4A" stroke-width="2" transform="rotate(-120 -9.5 5.5)"/></g></g>' + sw +
+      '<rect x="112" y="104" width="196" height="40" rx="20" fill="#75AADB" stroke="#0F1E4A" stroke-width="3"/>' +
+      '<ellipse cx="136" cy="96" rx="' + rx + '" ry="' + ry + '" fill="rgba(229,56,79,' + op + ')" stroke="#E5384F" stroke-width="3" stroke-dasharray="6 5"/>' +
+      '<circle cx="136" cy="100" r="19" fill="#FFD9B0" stroke="#0F1E4A" stroke-width="3"/><path d="M127 99 q4 4 8 0M139 99 q4 4 8 0" stroke="#0F1E4A" stroke-width="2.4" fill="none" stroke-linecap="round"/>' +
+      '<rect x="318" y="52" width="30" height="44" rx="8" fill="#fff" stroke="#0F1E4A" stroke-width="3"/><circle cx="333" cy="66" r="6" fill="#14A653" stroke="#0F1E4A" stroke-width="2"/><text x="333" y="88" font-size="10" font-weight="800" text-anchor="middle" fill="#0F1E4A">' + Math.round(H.cab) + '</text>' +
+      '<text x="333" y="112" font-size="10" text-anchor="middle" fill="#0F1E4A">' + qq('wall', 'pared') + '</text><text x="40" y="132" font-size="10" text-anchor="middle" fill="#0F1E4A">' + qq('fan', 'ventilador') + '</text>' +
+      '<text x="30" y="46" font-size="12" font-weight="800" fill="#0F1E4A">' + H.temp.toFixed(1) + ' °C</text></svg>';
+  }
+  function habUpd() {
+    var H = RG.hab; if (!$('o_hab')) return;
+    var ph = { idle:H.sleep ? qq('Sleeping. Body signals are normal.', 'Durmiendo. Las señales del cuerpo son normales.') : qq('Awake. Nothing to do.', 'Despierto. Nada para hacer.'),
+      detected:qq('CO2 pocket suspected from the body. The ship acted by itself. The astronaut was not woken.', 'Bolsa de CO2 sospechada por el cuerpo. La nave actuó sola. No se despertó al astronauta.'),
+      cleared:qq('Bubble cleared. Fan back to normal.', 'Burbuja despejada. Ventilador de nuevo en normal.'),
+      esc:qq('Auto-control is off or not enough: waking the astronaut gently.', 'El control automático está apagado o no alcanzó: se despierta al astronauta con suavidad.') };
+    var line = ph[H.ph] || ph.idle; if (H.sleep && (H.ph === 'idle' || H.ph === 'cleared') && H.sym > 0) line = qq('Body signals are changing: confirming (' + Math.round(H.sym) + ' s of ' + H.need + ').', 'Las señales del cuerpo cambian: confirmando (' + Math.round(H.sym) + ' s de ' + H.need + ').');
+    var lv = H.ph === 'esc' ? 2 : (H.ph === 'detected' ? 1 : 0), hi = H.head > 2500;
+    rset('o_hab', habSvg(H) + '<div class="habst l' + lv + '">' + lvDot(lv) + '<b>' + line + '</b></div>' +
+      '<div class="habgrid"><div class="habm"><span>' + qq('Wall sensor (cabin)', 'Sensor de pared (cabina)') + '</span><b class="ok">' + Math.round(H.cab) + ' ppm · OK</b></div>' +
+      '<div class="habm"><span>' + qq('At the head (invisible)', 'En la cabeza (invisible)') + '</span><b class="' + (hi ? 'bad' : 'ok') + '">' + Math.round(H.head / 10) * 10 + ' ppm</b></div>' +
+      '<div class="habm"><span>' + qq('Breathing', 'Respiración') + '</span><b>' + H.rr.toFixed(0) + ' rpm</b></div>' +
+      '<div class="habm"><span>' + qq('Pulse · HRV', 'Pulso · HRV') + '</span><b>' + H.pulse.toFixed(0) + ' · ' + H.hrv.toFixed(0) + ' ms</b></div></div>' +
+      '');
+    rset('o_habmq', '<div class="habmq"><b>' + qq('Commands (MQTT-style)', 'Órdenes (estilo MQTT)') + '</b>' + (H.msgs.length ? H.msgs.map(function (m) { return '<div><span class="mono">' + fmtMET(m.t) + '</span> <code>' + m.topic + '</code> ' + esc(m.payload) + '</div>'; }).join('') : '<div class="note">' + qq('No commands yet.', 'Todavía no hay órdenes.') + '</div>') + '</div>');
+  }
+  function paneHab() {
+    var H = RG.hab;
+    return '<div class="card"><h2>' + qq('EMPATHIC HABITAT · THE BODY RUNS THE SHIP', 'HÁBITAT EMPÁTICO · EL CUERPO MANEJA LA NAVE') + '</h2><p class="note">' + qq('In microgravity warm air does not rise. While the astronaut sleeps, exhaled CO2 can gather around the head like an invisible bubble that the wall sensor never sees. Here the wristband reads the body and the ship reacts by itself.', 'En microgravedad el aire caliente no sube. Mientras el astronauta duerme, el CO2 que exhala puede juntarse alrededor de la cabeza como una burbuja invisible que el sensor de pared nunca ve. Acá la pulsera lee el cuerpo y la nave reacciona sola.') + '</p>' +
+      '<div class="habwrap"><div class="habL"><div id="o_hab"></div></div><div class="habR">' +
+      '<div class="scen">' + rbtn('hsleep', H.sleep ? qq('☀ Wake up', '☀ Despertar') : qq('🌙 Falls asleep', '🌙 Se duerme')) + rbtn('hauto', qq('Auto: ', 'Auto: ') + (H.auto ? 'ON' : 'OFF'), true) + rbtn('hreset', qq('↺ Reset', '↺ Reiniciar'), true) + '</div>' +
+      '<h3 class="habh">' + qq('Sliders', 'Tiradores') + '</h3>' +
+      rsl('hab.cab', qq('Cabin CO2 (wall sensor)', 'CO2 de la cabina (sensor de pared)'), 400, 1500, 50, ' ppm') + rsl('hab.src', qq('CO2 the astronaut exhales', 'CO2 que exhala el astronauta'), 0.5, 4, 0.1, '') + rsl('hab.need', qq('Seconds to confirm', 'Segundos para confirmar'), 30, 300, 10, ' s') +
+      rchk('air.asleep', qq('Astronaut is asleep (alerts)', 'El astronauta duerme (alertas)')) + rsl('air.co2', qq('Cabin CO2 for alerts', 'CO2 de cabina para alertas'), 400, 7000, 100, ' ppm') + rsl('air.flow', qq('Airflow', 'Flujo de aire'), 0, 0.3, 0.01, ' m/s') + rsl('air.co', 'CO', 0, 40, 1, ' ppm') + rsl('air.nh3', 'NH3', 0, 10, 0.5, ' ppm') + rsl('air.hcho', qq('Formaldehyde', 'Formaldehído'), 0, 0.2, 0.01, ' ppm') + '<div id="o_air"></div>' +
+      '</div></div><div id="o_habmq"></div><p class="note">' + qq('Simulation with example thresholds. In a real build the commands would travel by MQTT to a PLC (for example a Siemens S7-1200) that runs the fan, the light and the thermostat. Turn auto off to see what the wall sensor misses.', 'Simulación con umbrales de ejemplo. En una versión real las órdenes viajarían por MQTT a un PLC (por ejemplo un Siemens S7-1200) que maneja el ventilador, la luz y el termostato. Apagá el modo auto para ver lo que el sensor de pared no ve.') + '</p></div>';
+  }
+
+  /* ===== FRICCION SOCIAL: tension de convivencia, en privado ===== */
+  function frStep(dt) {
+    var F = RG.fr, raw = F.alone * 7 + F.stress * 5 + Math.max(0, 90 - F.together) * 0.5 - F.acts * 12; raw = Math.max(0, Math.min(100, raw));
+    F.idx += (raw - F.idx) * (1 - Math.exp(-dt / 400));
+    if (F.idx >= 35 && !F.sent) {
+      F.sent = true;
+      F.plan = [qq('Work shifts rearranged: the two crewmates no longer share a block this week.', 'Turnos reorganizados: los dos compañeros ya no comparten bloque esta semana.'), qq('Cooperative activity scheduled: tend the Veggie garden together, 20 min a day.', 'Actividad cooperativa programada: cuidar juntos la huerta Veggie, 20 min por día.')];
+      decide(qq('Crew: local AI saw confinement tension. Shifts rearranged and a calm cooperative activity scheduled. Nobody was named.', 'Tripulación: la IA local detectó tensión de confinamiento. Se reorganizaron turnos y se programó una actividad cooperativa tranquila. No se nombró a nadie.'));
+      notify({ type:'msg', sev:0, title:qq('Crew schedule updated', 'Agenda de la tripulación actualizada'), body:qq('New shared activity: Veggie garden. Shifts were adjusted for everyone.', 'Nueva actividad compartida: huerta Veggie. Se ajustaron los turnos para todos.') });
+      sendMsg('toGround', qq('Crew cohesion: watch (anonymous summary). No names or personal data were shared.', 'Cohesión de la tripulación: atención (resumen anónimo). No se compartieron nombres ni datos personales.'));
+    }
+    if (F.idx < 20 && F.sent && F.acts > 0) { F.sent = false; F.plan = []; decide(qq('Crew: tension is back to normal. Plan closed.', 'Tripulación: la tensión volvió a lo normal. Plan cerrado.')); }
+  }
+  function frSvg(F) {
+    var st = F.stress > 0, w = 3 + F.stress * 1.1, aw = 1 + F.together / 28, col = F.idx >= 65 ? '#E5384F' : (F.idx >= 35 ? '#E6A100' : '#14A653');
+    return '<svg class="habsvg" viewBox="0 0 300 190" role="img" aria-label="' + qq('Crew map: four crewmates and the strength of their contact', 'Mapa de la tripulación: cuatro compañeros y la fuerza de su contacto') + '">' +
+      '<rect x="4" y="4" width="292" height="182" rx="18" fill="#EAF5FF" stroke="#0F1E4A" stroke-width="3"/>' +
+      '<g stroke-linecap="round"><path d="M80 50 L220 50" stroke="' + (st ? '#E5384F' : '#14A653') + '" stroke-width="' + w + '"/>' +
+      '<path d="M80 50 L220 140" stroke="#6B7DB0" stroke-width="' + aw + '" stroke-dasharray="' + (F.together < 60 ? '4 7' : '0') + '"/><path d="M80 50 L80 140" stroke="#6B7DB0" stroke-width="' + aw + '" stroke-dasharray="' + (F.together < 60 ? '4 7' : '0') + '"/>' +
+      '<path d="M220 50 L220 140" stroke="#14A653" stroke-width="4"/><path d="M220 50 L80 140" stroke="#14A653" stroke-width="4"/><path d="M80 140 L220 140" stroke="#14A653" stroke-width="4"/></g>' +
+      [['A', 80, 50], ['B', 220, 50], ['C', 220, 140], ['D', 80, 140]].map(function (n) { return '<g><circle cx="' + n[1] + '" cy="' + n[2] + '" r="22" fill="' + (n[0] === 'A' || n[0] === 'B' ? (F.idx >= 35 ? col : '#75AADB') : '#75AADB') + '" stroke="#0F1E4A" stroke-width="3"/><text x="' + n[1] + '" y="' + (n[2] + 6) + '" font-size="18" font-weight="800" text-anchor="middle" fill="#0F1E4A">' + n[0] + '</text></g>'; }).join('') +
+      '<text x="80" y="20" font-size="11" text-anchor="middle" fill="#0F1E4A">' + (F.alone > 0 ? qq('eats alone ×' + F.alone + ' d', 'come solo ×' + F.alone + ' d') : '') + '</text></svg>';
+  }
+  function frUpd() {
+    var F = RG.fr; if (!$('o_fr')) return;
+    var lv = F.idx >= 65 ? 2 : (F.idx >= 35 ? 1 : 0), name = [qq('OK', 'Bien'), qq('Watch', 'Atención'), qq('Alert', 'Alerta')][lv];
+    rset('o_fr', frSvg(F) + '<div class="row"><span class="k">' + qq('Tension index', 'Índice de tensión') + '</span><b>' + Math.round(F.idx) + ' / 100</b></div>' + rbar(F.idx, 35, lv) +
+      '<div class="frcols"><div class="habmq"><b>' + qq('Stays on board only', 'Se queda solo a bordo') + '</b>' +
+      '<div>' + qq('A eats alone: ' + F.alone + ' days', 'A come solo: ' + F.alone + ' días') + '</div><div>' + qq('A shares ' + F.together + ' min a day with the crew', 'A comparte ' + F.together + ' min por día con el equipo') + '</div>' +
+      '<div>' + qq('A and B meet: pulse +' + (F.stress * 1.5).toFixed(0) + ' bpm, HRV −' + (F.stress * 3) + '% each time', 'A y B se cruzan: pulso +' + (F.stress * 1.5).toFixed(0) + ' lpm, HRV −' + (F.stress * 3) + '% cada vez') + '</div></div>' +
+      '<div class="habmq"><b>' + qq('Earth receives (anonymous)', 'La Tierra recibe (anónimo)') + '</b><div>' + qq('Crew cohesion: ', 'Cohesión de la tripulación: ') + '<b>' + name + '</b></div><div class="note">' + qq('No names. No personal data.', 'Sin nombres. Sin datos personales.') + '</div></div></div>' +
+      (F.plan.length ? '<div class="habmq"><b>' + qq('What the ship did', 'Qué hizo la nave') + '</b>' + F.plan.map(function (x) { return '<div>✔ ' + x + '</div>'; }).join('') + '</div>' : ''));
+  }
+  function paneFr() {
+    return '<div class="card"><h2>' + qq('CREW FRICTION · PRIVATE BY DESIGN', 'FRICCIÓN DE LA TRIPULACIÓN · PRIVADA POR DISEÑO') + '</h2><p class="note">' + qq('Everyone wears a wristband. The ship compares who shares meals and spaces, and whether meeting someone raises the pulse and lowers HRV. It never tells Earth who. It rearranges shifts and plans a calm shared activity.', 'Todos usan la pulsera. La nave compara quién comparte comidas y espacios, y si cruzarse con alguien sube el pulso y baja la HRV. Nunca le dice a la Tierra quién. Reorganiza turnos y programa una actividad tranquila en equipo.') + '</p>' +
+      rsl('fr.alone', qq('Days A eats alone', 'Días que A come solo'), 0, 7, 1, '') + rsl('fr.stress', qq('Tense A and B encounters per day', 'Cruces tensos de A y B por día'), 0, 10, 1, '') + rsl('fr.together', qq('Minutes a day A shares with the crew', 'Minutos por día que A comparte con el equipo'), 0, 120, 5, ' min') +
+      '<div class="scen">' + rbtn('fr4', qq('⏩ 4 tense days', '⏩ 4 días tensos')) + rbtn('fract', qq('🌱 Veggie garden together', '🌱 Huerta Veggie juntos'), true) + rbtn('frreset', qq('↺ Reset', '↺ Reiniciar'), true) + '</div>' +
+      '<div id="o_fr"></div><p class="note">' + qq('Simulation with invented numbers. The goal is care, not control: no individual data leaves the ship.', 'Simulación con números inventados. El objetivo es cuidar, no controlar: ningún dato individual sale de la nave.') + '</p></div>';
   }
 
   /* ---- acciones de los botones ---- */
@@ -2668,6 +2790,16 @@ else if (typeof exports === 'object'){
     else if (a === 'wl') RG.wl.h = 0;
     else if (a === 'pvt') { goTab('ta2'); rtStart(); var c = $('procCard'); if (c && c.scrollIntoView) c.scrollIntoView({ block:'center' }); }
     else if (a === 'coord') { goTab('ta2'); coordStart(); var c2 = $('procCard'); if (c2 && c2.scrollIntoView) c2.scrollIntoView({ block:'center' }); }
+    else if (a === 'more') RG.more = !RG.more;
+    else if (a === 'hsleep') { var H1 = RG.hab; H1.sleep = !H1.sleep; if (!H1.sleep) { H1.fanCmd = true; H1.ph = 'idle'; H1.sym = 0; H1.cct = 3000; H1.temp = 21.5; } }
+    else if (a === 'hauto') RG.hab.auto = !RG.hab.auto;
+    else if (a === 'hreset') RG.hab = habNew();
+    else if (a === 'night') { RG.hab = habNew(); RG.hab.sleep = true; RG.pane = 'E'; goG('tgR'); CLK.speed = 120; $('spd').value = '120'; }
+    else if (a === 'crew') { RG.fr = frNew(); RG.pane = 'I'; goG('tgR'); CLK.speed = 120; $('spd').value = '120'; RG.fr.alone = 4; RG.fr.stress = 6; RG.fr.together = 25; }
+    else if (a === 'fr4') { RG.fr.alone = 4; RG.fr.stress = 6; RG.fr.together = 25; }
+    else if (a === 'fract') { RG.fr.acts++; RG.fr.alone = Math.max(0, RG.fr.alone - 1); RG.fr.stress = Math.max(0, RG.fr.stress - 2); RG.fr.together = Math.min(120, RG.fr.together + 30); }
+    else if (a === 'frreset') RG.fr = frNew();
+    if (a === 'calm') { RG.hab = habNew(); RG.fr = frNew(); }
     ridgeStep(); buildRidge();
   }
   function soundOn(on) {
@@ -2764,11 +2896,17 @@ else if (typeof exports === 'object'){
   }
 
   /* ---- paneles ---- */
+  function simplify() {
+    var body = $('rBody'), cards = body.querySelectorAll('.card'), keep = 1, i, extra = 0;
+    for (i = 0; i < cards.length; i++) { if (i >= keep) { cards[i].classList.add('secondary'); extra++; } }
+    body.classList.toggle('showall', !!RG.more);
+    if (extra) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn ghost morebtn'; b.setAttribute('data-ra', 'more'); b.textContent = RG.more ? qq('Show less ▴', 'Ver menos ▴') : qq('Show more ▾', 'Ver más ▾'); body.appendChild(b); }
+  }
   function buildRidge() {
     var sub = [['ov', qq('OVERVIEW', 'RESUMEN')], ['R', qq('RADIATION', 'RADIACIÓN')], ['I', qq('ISOLATION', 'AISLAMIENTO')], ['D', qq('DISTANCE', 'DISTANCIA')], ['G', qq('GRAVITY', 'GRAVEDAD')], ['E', qq('ENVIRONMENT', 'ENTORNO')]];
     $('rSub').innerHTML = sub.map(function (s) { return '<button type="button" data-rp="' + s[0] + '" aria-pressed="' + (RG.pane === s[0]) + '">' + (s[0] === 'ov' ? '' : '<span id="rl_' + s[0] + '"></span>') + s[1] + '</button>'; }).join('');
     var P = { ov:paneOv, R:paneR, I:paneI, D:paneD, G:paneG, E:paneE }[RG.pane];
-    $('rBody').innerHTML = P(); diaryBuild(); if (RG.sos) sosBuild(); rUpd(true);
+    $('rBody').innerHTML = P(); simplify(); diaryBuild(); if (RG.sos) sosBuild(); rUpd(true);
   }
   function paneOv() {
     return '<div id="o_hero"></div><div class="card"><h2>' + qq('RADIATION DOSE · TOTAL', 'DOSIS DE RADIACIÓN · TOTAL') + '</h2><div class="dosebig"><span id="o_dm">0</span> mSv <small>' + qq('this mission', 'esta misión') + '</small> &nbsp;·&nbsp; <span id="o_dc">0</span> / 600 mSv <small>' + qq('career total', 'total de carrera') + '</small></div><div id="o_dbar"></div><p class="note">' + qq('Career limit 600 mSv. At 75% (450 mSv) EVAs are reassigned. Dose numbers are simulated.', 'Límite de carrera 600 mSv. Al 75% (450 mSv) se reasignan las EVA. Los valores de dosis son simulados.') + '</p></div>' +
@@ -2789,7 +2927,7 @@ else if (typeof exports === 'object'){
       '<div class="card"><h2>' + qq('TARGETED CLINICAL SURVEILLANCE', 'VIGILANCIA CLÍNICA DIRIGIDA') + '</h2><div id="o_surv"></div></div></div>';
   }
   function paneI() {
-    return '<div class="grid2"><div class="card"><h2>' + qq('CIRCADIAN LIGHTING · MARS SOL', 'ILUMINACIÓN CIRCADIANA · SOL MARCIANO') + '</h2><div id="o_light"></div></div>' +
+    return paneFr() + '<div class="grid2"><div class="card"><h2>' + qq('CIRCADIAN LIGHTING · MARS SOL', 'ILUMINACIÓN CIRCADIANA · SOL MARCIANO') + '</h2><div id="o_light"></div></div>' +
       '<div class="card"><h2>' + qq('SLEEP & WORKLOAD', 'SUEÑO Y CARGA DE TRABAJO') + '</h2>' + rsl('nights.0', qq('Two nights ago', 'Hace dos noches'), 0, 10, 0.5, ' h') + rsl('nights.1', qq('Last night', 'Anoche'), 0, 10, 0.5, ' h') + rsl('nights.2', qq('Tonight (in progress)', 'Esta noche (en curso)'), 0, 10, 0.5, ' h') + '<div id="o_sleep"></div></div></div>' +
       '<div class="grid2"><div class="card"><h2>' + qq('COGNITIVE FATIGUE (PVT)', 'FATIGA COGNITIVA (PVT)') + '</h2><div id="o_pvt"></div>' + rbtn('pvt', qq('Run the 5-trial test on the tablet', 'Hacer el test de 5 intentos en la tablet'), true) + '</div>' +
       '<div class="card"><h2>' + qq('PRIVATE DIARY', 'DIARIO PRIVADO') + '</h2><div id="o_dia"></div></div></div>' +
@@ -2809,7 +2947,7 @@ else if (typeof exports === 'object'){
       '<div class="card"><h2>' + qq('PRE-LANDING FITNESS', 'APTITUD PRE-ATERRIZAJE') + '</h2><div id="o_land"></div>' + rbtn('coord', qq('Run the coordination test on the tablet', 'Hacer el test de coordinación en la tablet'), true) + '</div></div>';
   }
   function paneE() {
-    return '<div class="grid2"><div class="card"><h2>' + qq('SLEEP CABIN ATMOSPHERE', 'ATMÓSFERA DE LA CABINA DE DESCANSO') + '</h2>' + rchk('air.asleep', qq('Astronaut is asleep', 'El astronauta duerme')) + rsl('air.co2', 'CO2', 400, 7000, 100, ' ppm') + rsl('air.flow', qq('Airflow', 'Flujo de aire'), 0, 0.3, 0.01, ' m/s') + rsl('air.co', 'CO', 0, 40, 1, ' ppm') + rsl('air.nh3', 'NH3', 0, 10, 0.5, ' ppm') + rsl('air.hcho', qq('Formaldehyde', 'Formaldehído'), 0, 0.2, 0.01, ' ppm') + '<div id="o_air"></div></div>' +
+    return paneHab() + '<div class="grid2">' +
       '<div class="card"><h2>' + qq('PREDICTIVE MAINTENANCE', 'MANTENIMIENTO PREDICTIVO') + '</h2><div id="o_maint"></div>' + rsl('hepa.dp', qq('HEPA pressure drop', 'Caída de presión HEPA'), 50, 300, 5, ' Pa') + rbtn('hepa', qq('Replace HEPA', 'Reemplazar HEPA'), true) + ' ' + rbtn('wl', qq('Replace water filter', 'Reemplazar filtro de agua'), true) + '</div></div>' +
       '<div class="grid2"><div class="card"><h2>' + qq('MICROBIAL RISK MAP', 'MAPA DE RIESGO MICROBIOLÓGICO') + '</h2>' + rsl('micro.kitchen', qq('Kitchen swab', 'Hisopado cocina'), 0, 600, 10, '') + rsl('micro.bath', qq('Bathroom swab', 'Hisopado baño'), 0, 600, 10, '') + rsl('micro.gym', qq('Gym swab', 'Hisopado gimnasio'), 0, 600, 10, '') + '<div id="o_mic"></div></div>' +
       '<div class="card"><h2>' + qq('IMMUNITY & STRESS BIOMARKERS', 'INMUNIDAD Y BIOMARCADORES DE ESTRÉS') + '</h2>' + rsl('immu.cort', qq('Stress hormone vs baseline', 'Hormona del estrés vs línea base'), -20, 100, 5, '%') + rsl('immu.infl', qq('Inflammation marker vs baseline', 'Marcador inflamatorio vs línea base'), -20, 100, 5, '%') + '<div id="o_immu"></div></div></div>';
@@ -2817,6 +2955,7 @@ else if (typeof exports === 'object'){
 
   /* ---- actualizar valores en pantalla ---- */
   function rUpd(force) {
+    habUpd(); frUpd();
     var tot = RG.career + RG.mission, pct = tot / 6, d24 = RG.d24, L = levels(S.v, S.base), eva = SUIT.eva;
     var lvPct = pct >= 100 ? 2 : (pct >= 75 ? 1 : 0), lv24 = d24 >= RG.cap * 1.5 ? 2 : (d24 >= RG.cap ? 1 : 0);
     ['R', 'I', 'D', 'G', 'E'].forEach(function (m) { rset('rl_' + m, lvDot(RG.lv[m])); });
@@ -2886,8 +3025,6 @@ else if (typeof exports === 'object'){
     rset('o_sosstate', '');
   }
 
-  function advUpd() { var on = document.body.classList.contains('advanced'), b = $('advTog'); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? qq('ADVANCED ▴', 'AVANZADO ▴') : qq('ADVANCED ▾', 'AVANZADO ▾'); }
-  $('advTog').addEventListener('click', function () { var on = document.body.classList.toggle('advanced'); if (!on) { var act = document.querySelector('[data-bar=g] [aria-selected=true]'); if (act && act.classList.contains('adv')) goG('tgR'); } advUpd(); });
   $('sosBtn').addEventListener('click', sosStart);
   $('sosBox').addEventListener('click', function (e) { if (e.target.id === 'sosEnd') sosEnd(); });
   $('sosBox').addEventListener('change', function (e) { if (e.target.id === 'sosSel') { RG.sosSel = e.target.value; sosBuild(); } });
@@ -2944,32 +3081,6 @@ else if (typeof exports === 'object'){
   });
 
 
-  /* ===== misiones (juego) ===== */
-  var MIS = [0, 0, 0, 0, 0], ACKED = false;
-  function misTxt() { return [qq('Trigger a solar storm', 'Provocá una tormenta solar'), qq('Send the astronaut to the shelter', 'Mandá al astronauta al refugio'), qq('Raise an SOS', 'Lanzá un SOS'), qq('Earth receives an alert', 'La Tierra recibe una alerta'), qq('Earth acknowledges it', 'La Tierra da acuse')]; }
-  function misCount() { return MIS.reduce(function (a, b) { return a + b; }, 0); }
-  function misRender() {
-    $('misN').textContent = misCount();
-    $('misList').innerHTML = misTxt().map(function (x, i) { return '<li class="' + (MIS[i] ? 'ok' : '') + '"><i>' + (MIS[i] ? '✓' : '') + '</i><span>' + x + '</span></li>'; }).join('');
-  }
-  function misDone(i) {
-    if (MIS[i]) return; MIS[i] = 1; misRender();
-    var n = misCount(), t = misTxt()[i];
-    try { window.dispatchEvent(new CustomEvent('bc-mission', { detail: { i: i, n: n, title: n === 5 ? qq('Mission complete: you flew the Barrilete!', 'Misión cumplida: ¡volaste el Barrilete!') : t, all: n === 5 } })); } catch (e) {}
-  }
-  document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('[data-ack]')) ACKED = true; }, true);
-  setInterval(function () {
-    if (DEMO) return;
-    if (RG.spe) misDone(0);
-    if (RG.spe && RG.shelter) misDone(1);
-    if (RG.sos) misDone(2);
-    if (RX.some(function (x) { return x.row && x.row.level > 0; })) misDone(3);
-    if (ACKED) misDone(4);
-  }, 500);
-  $('misBtn').addEventListener('click', function (e) { e.stopPropagation(); var o = $('misPop').hidden; $('misPop').hidden = !o; this.setAttribute('aria-expanded', String(o)); });
-  document.addEventListener('click', function (e) { if (!$('misPop').hidden && !e.target.closest('#misPop') && !e.target.closest('#misBtn')) { $('misPop').hidden = true; $('misBtn').setAttribute('aria-expanded', 'false'); } });
-  $('misReset').addEventListener('click', function () { MIS = [0, 0, 0, 0, 0]; ACKED = false; misRender(); });
-  misRender();
   /* ===== panel de carga (dock) ===== */
   document.querySelectorAll('[data-da]').forEach(function (b) {
     b.addEventListener('click', function () { var a = b.dataset.da; if (a !== 'calm') goTab('ta1'); raAct(a); });
@@ -2985,8 +3096,8 @@ else if (typeof exports === 'object'){
   for (var i = 0; i < 30; i++) ORDER.forEach(function (k) { S.hist[k].push(val(k)); });
   applyLang(saved === 'es' ? 'es' : 'en');
   tick();
-  initDB();
-  goG('tgR'); advUpd();
+  initDB(); buildRidge();
+
   fitWatch(); setTimeout(fitWatch, 300); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWatch);
   setInterval(tick, 2000);
   var _n = 0;
@@ -3013,27 +3124,6 @@ else if (typeof exports === 'object'){
     var t = el.textContent; el.textContent = '';
     t.split('').forEach(function (c) { var s = document.createElement('span'); s.className = 'ch'; s.textContent = c; el.appendChild(s); });
   });
-
-  /* ---- toast y confeti (misiones) ---- */
-  function confetti(n) {
-    var cols = ['#75AADB', '#ffffff', '#FFC21A', '#FF5D73'], W = innerWidth, H = innerHeight;
-    for (var i = 0; i < n; i++) {
-      var d = document.createElement('i'); d.className = 'cf'; d.style.background = cols[i % 4];
-      d.style.left = (W / 2) + 'px'; d.style.top = (H - 110) + 'px'; document.body.appendChild(d);
-      gsap.to(d, { x: (Math.random() - .5) * W * .8, y: -(120 + Math.random() * H * .6), rotation: Math.random() * 720 - 360, duration: 1.6 + Math.random(), ease: 'power2.out' });
-      gsap.to(d, { opacity: 0, delay: 1.3, duration: .8, onComplete: (function (el) { return function () { el.remove(); }; })(d) });
-    }
-  }
-  var toastTl;
-  window.addEventListener('bc-mission', function (e) {
-    var d = e.detail, t = $('#toast'); t.textContent = (d.all ? '🪁 ' : '✓ ') + d.title + (d.all ? '' : '  (' + d.n + '/5)');
-    if (toastTl) toastTl.kill();
-    toastTl = gsap.timeline().set(t, { visibility: 'visible' }).fromTo(t, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .45, ease: 'back.out(1.8)' }).to(t, { opacity: 0, y: 20, duration: .4, delay: d.all ? 4 : 2.2 }).set(t, { visibility: 'hidden' });
-    if (!rm) confetti(d.all ? 70 : 14);
-  });
-
-  /* ---- panel de misiones ---- */
-  /* (se maneja dentro de la app) */
 
   /* ---- progreso del viaje y cockpit ---- */
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) { gsap.set('#jtk', { top: (s.progress * 100) + '%' }); } });
