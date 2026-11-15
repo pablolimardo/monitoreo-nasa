@@ -152,7 +152,7 @@
   .arrow{align-self:center;color:var(--cyan);font-size:1.2rem}
   .zone{width:100%;text-align:center;font:600 .7rem 'JetBrains Mono',monospace;letter-spacing:3px;color:var(--mute)}
   header{position:static}
-  .suitwrap{max-width:300px;margin:0 auto}.suitwrap svg{width:100%;height:auto;display:block}
+  .suitwrap{max-width:min(300px,30vh);margin:0 auto}.suitwrap svg{width:100%;height:auto;display:block}
   .vring{fill:none;stroke:var(--c);stroke-width:9;filter:drop-shadow(0 0 8px var(--c));--c:var(--green)}
   .vring.l1{--c:var(--yellow);animation:blinkS 1.2s infinite}.vring.l2{--c:var(--red);animation:blinkF .4s infinite}
   .sz{--c:var(--green)}.sz.l1{--c:var(--yellow)}.sz.l2{--c:var(--red)}
@@ -160,6 +160,9 @@
   .sz.l1 .lc{animation:blinkS 1.2s infinite}.sz.l2 .lc{animation:blinkF .4s infinite}
   .suit.off .vring,.suit.off .sz{--c:#2a2f45;animation:none}.suit.off .sz .lc,.suit.off .vring{animation:none;filter:none}
   .suit.syncing .vring{--c:#fff;animation:syncA .5s infinite alternate}.suit.syncing .sz .lc{fill:#fff;animation:syncA .5s infinite alternate}
+  rect.vring{stroke-width:6}.eyex{display:none;fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;filter:drop-shadow(0 0 6px #fff)}
+  .suit.dying .eyex{display:block;animation:blinkF .9s infinite}.suit.dead .eyex{display:block}
+  #cockpit .btn[disabled]{opacity:.55;cursor:not-allowed}
   .suit.fl-info .vring.l0{--c:var(--cyan);animation:blinkS 1s 3}
   .lgd .lg{display:flex;align-items:center;margin:6px 0;font-size:.82rem}
   .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:10px;flex:none}
@@ -432,7 +435,6 @@
   #cockpit .btn{background:var(--sun);color:var(--ink);border:3px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);font-weight:800;transition:transform .12s,box-shadow .12s}
   #cockpit .btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}#cockpit .btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
   #cockpit .btn.ghost{background:#fff;color:var(--ink)}
-  #cockpit .demobar{background:var(--sun);color:var(--ink);border-bottom:3px solid var(--ink)}#cockpit .demobar .mono{color:var(--ink)}
   #cockpit .panel{background:#EAF5FF;border:3px solid var(--ink);border-radius:26px;box-shadow:6px 6px 0 var(--ink)}
   #cockpit .phead{border-bottom:3px solid var(--ink);color:var(--ink);font-weight:800;font-size:.85rem}
   #cockpit #viewAstro .phead{background:var(--sun)}#cockpit #viewGround .phead.earth{background:var(--sky);color:var(--ink)}
@@ -509,6 +511,68 @@
   #dock .dkctl,#dock #dkTog{display:none}
   header .mbar span:nth-child(n+4){display:none}
   #cockpit #viewGround .card .row .k{color:#3F5486}
+  #cockpit .demobar{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);width:min(820px,95vw);z-index:45;display:block;padding:12px 16px 0;background:#FFC21A;color:#0F1E4A;border:3px solid #0F1E4A;border-radius:22px;box-shadow:6px 6px 0 #0F1E4A;overflow:hidden}
+  #cockpit .demobar[hidden]{display:none}
+  .dm-top{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .dm-steps{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+  .dm-steps li{display:flex;align-items:center;gap:5px;font:700 .72rem 'Bricolage Grotesque',sans-serif;opacity:.55}
+  .dm-steps li i{font-style:normal;width:22px;height:22px;border-radius:50%;border:2px solid #0F1E4A;background:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem}
+  .dm-steps li.done{opacity:1}.dm-steps li.done i{background:#14A653;color:#fff}
+  .dm-steps li.now{opacity:1}.dm-steps li.now i{background:#0F1E4A;color:#FFC21A}.dm-steps li.now span{text-decoration:underline;text-underline-offset:3px}
+  .dm-steps li:not(.now) span{display:none}
+  .dm-btns{display:flex;gap:6px;flex:none}.dm-btns .btn{padding:5px 12px;font-size:.78rem;margin:0;background:#fff;color:#0F1E4A;border:2px solid #0F1E4A}
+  .dm-main{display:flex;align-items:center;gap:14px;padding:10px 0 12px}
+  .dm-ico{font-size:2rem;line-height:1;flex:none;width:52px;height:52px;border-radius:50%;background:#fff;border:3px solid #0F1E4A;display:flex;align-items:center;justify-content:center}
+  .dm-tx{flex:1;min-width:0}.dm-tx b{display:block;font:800 1.02rem 'Bricolage Grotesque',sans-serif}.dm-tx p{margin:2px 0 0;font-size:.95rem;line-height:1.35;max-width:60ch}
+  .dm-where{flex:none;background:#0F1E4A;color:#FFC21A;font:800 .78rem 'Bricolage Grotesque',sans-serif;border-radius:999px;padding:7px 12px;white-space:nowrap}
+  .dm-bar{position:relative;height:8px;margin:0 -16px;background:rgba(15,30,74,.18)}
+  .dm-bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:#0F1E4A}.dm-bar em{display:none;position:absolute;inset:0;font:700 .62rem/8px 'Bricolage Grotesque',sans-serif}
+  .dm-wait .dm-bar{height:20px}.dm-wait .dm-bar i{width:100%;background:repeating-linear-gradient(45deg,#0F1E4A 0 10px,#2A3D78 10px 20px);background-size:28px 28px;animation:dmstripe .8s linear infinite}
+  .dm-wait .dm-bar em{display:block;color:#FFC21A;text-align:center;line-height:20px}
+  @keyframes dmfill{to{width:100%}}@keyframes dmstripe{to{background-position:28px 0}}
+  #cockpit .panel.demo-hl{outline:5px solid #E5384F;outline-offset:3px;animation:dmring 1.2s ease-in-out infinite}
+  @keyframes dmring{50%{outline-offset:7px}}
+  @media (prefers-reduced-motion:reduce){#cockpit .panel.demo-hl,.dm-wait .dm-bar i{animation:none}}
+  @media (max-width:1000px){#cockpit .demobar{bottom:10px}.dm-where{display:none}.dm-steps li span{display:none!important}}
+  body.demo-on #cockpit main.app{padding-bottom:132px}
+  @media (max-width:1000px){body.demo-on #cockpit main.app{padding-bottom:0}}
+  @keyframes cdpulse{50%{box-shadow:4px 4px 0 #E5384F,0 0 0 5px rgba(229,56,79,.35)}}
+  @media (prefers-reduced-motion:reduce){.cdbox.bad{animation:none}}
+  .stormcd{padding:8px 12px 0;background:#EAF5FF}
+  .cdbox{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:2px 12px;border:3px solid #0F1E4A;border-radius:16px;box-shadow:3px 3px 0 #0F1E4A;padding:7px 12px 0;overflow:hidden;color:#0F1E4A}
+  .cdbox.ok{background:#BDF2D0}.cdbox.warn{background:#FFE49A}.cdbox.bad{background:#FFB8C2;animation:cdpulse .9s ease-in-out infinite}
+  .cdt{font:800 .72rem 'Bricolage Grotesque',sans-serif;letter-spacing:.02em}.cdn{font-size:.76rem;line-height:1.25}
+  .cdb{font:800 1.7rem/1 'Bricolage Grotesque',sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .cdbox .btn{background:#0F1E4A;color:#FFC21A;border:0;margin:0;padding:6px 12px;font-size:.76rem}
+  .cdbar{grid-column:1/-1;height:7px;margin:6px -12px 0;background:rgba(15,30,74,.2)}.cdbar i{display:block;height:100%;background:#0F1E4A;transition:width .25s linear}
+  .rrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:7px 0;border-bottom:2px dotted rgba(15,30,74,.25);font-size:.85rem}.rrow span{display:flex;flex-direction:column;color:#3F5486}.rrow small{font-size:.7rem;opacity:.85}.rrow b{text-align:right;color:#0F1E4A;max-width:58%}
+  .rrow.l1 b{color:#B07800}.rrow.l2 b{color:#C81E3A}
+  .radhow{margin-top:10px;font-size:.8rem}.radhow summary{cursor:pointer;font-weight:800}.radhow ul{margin:6px 0 0;padding-left:18px;line-height:1.4}
+  #rBody:not(.showall) .grid2{grid-template-columns:minmax(0,1fr)}
+  .rrow.rcol{flex-direction:column;align-items:stretch;gap:6px}.rrow.rcol span{display:flex}
+  .chips3{display:flex;gap:8px}.chips3 em{flex:1;font-style:normal;font-size:.72rem;text-align:center;border:2px solid #0F1E4A;border-radius:12px;padding:4px 6px;background:#fff;color:#3F5486}.chips3 em b{display:block;text-align:center;font-size:1.05rem;color:#0F1E4A;max-width:none}
+  .crewpick{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}#cockpit .crewpick .btn{padding:6px 12px;font-size:.78rem;margin:0;background:#fff;color:#0F1E4A;border:2px solid #0F1E4A;box-shadow:2px 2px 0 #0F1E4A}#cockpit .crewpick .btn[aria-pressed=true]{background:#FFC21A}
+  .profile{border:2px dashed #0F1E4A;border-radius:14px;padding:6px 12px 2px;margin:6px 0 10px;background:#F5FAFF}.selrow .k{font-weight:800;color:#0F1E4A}
+  .astrosel{display:flex;gap:6px;padding:7px 10px;background:#FFF3C4;border-bottom:3px solid #0F1E4A;flex-wrap:wrap}
+  #cockpit .astrosel .ac{flex:1 1 120px;display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:4px 10px;border:2px solid #0F1E4A;border-radius:14px;background:#fff;color:#0F1E4A;cursor:pointer;font-family:inherit;box-shadow:2px 2px 0 #0F1E4A;position:relative;text-align:left}
+  #cockpit .astrosel .ac b{font-size:.78rem}.astrosel .ac small{font-size:.64rem;opacity:.75}.astrosel .ac .dot{position:absolute;right:8px;top:8px;margin:0}
+  #cockpit .astrosel .ac.on{background:#FFC21A}
+  #cockpit .gob{padding:1px 8px;margin:0 0 0 6px;font-size:.72rem;background:#0F1E4A;color:#FFC21A;border:0}
+  .suitbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 12px}.suitbtns .btn{margin:0;padding:7px 14px;font-size:.8rem}
+  #cockpit .suitbtns .btn.ghost{background:#fff;color:#0F1E4A;border:2px solid #0F1E4A}
+  .hxhero{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 8px}
+  .hxheart{width:92px;height:84px;flex:none;fill:#E5384F;stroke:#0F1E4A;stroke-width:4;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(229,56,79,.45));transform-origin:50% 55%;animation:hxbeat 1s ease-in-out infinite}
+  @keyframes hxbeat{0%,100%{transform:scale(1)}12%{transform:scale(1.16)}26%{transform:scale(.97)}38%{transform:scale(1.08)}60%{transform:scale(1)}}
+  .hxnum{display:flex;flex-direction:column;align-items:flex-start;min-width:120px}.hxnum b{font:800 3.1rem/1 'Bricolage Grotesque','Orbitron',sans-serif;color:#0F1E4A}.hxnum span{font-size:.72rem;color:#53608a}
+  .hxz{font-style:normal;font-weight:800;font-size:.72rem;padding:3px 10px;border:2px solid #0F1E4A;border-radius:99px;margin-top:5px;background:#fff;color:#0F1E4A}
+  .hxz.z1{background:#CFF3DD}.hxz.z2{background:#FFE49A}.hxz.z3{background:#FFB3C1}
+  .hxbtns{display:flex;flex-direction:column;gap:6px;margin-left:auto}.hxbtns .btn{margin:0}
+  .hxspark{width:100%;height:74px;display:block;background:#fff;border:3px solid #0F1E4A;border-radius:14px;margin:4px 0 10px}
+  .hxtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .hxt{border:3px solid #0F1E4A;border-radius:16px;box-shadow:3px 3px 0 #0F1E4A;padding:8px 10px;background:#EAF5FF;display:flex;flex-direction:column;gap:1px}
+  .hxt.ok{background:#CFF3DD}.hxt.warn{background:#FFE49A}.hxt small{font-size:.66rem;font-weight:700;color:#0F1E4A}.hxt b{font:800 1.7rem/1.1 'Bricolage Grotesque','Orbitron',sans-serif;color:#0F1E4A}.hxt span{font-size:.68rem;color:#0F1E4A}
+  @media (max-width:520px){.hxtiles{grid-template-columns:1fr}.hxbtns{margin-left:0;flex-direction:row}}
+  @media (prefers-reduced-motion:reduce){.hxheart{animation:none}}
 </style>
 </head>
 <body>
@@ -607,17 +671,23 @@
     <div class="seg" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div>
   </div>
   <div class="howto" role="note"><span class="st"><i class="n">1</i><b data-i18n="how1">Load data in the dark blue bar</b></span><span class="sep">›</span><span class="st"><i class="n">2</i><b data-i18n="how2">The astronaut reacts on board</b></span><span class="sep">›</span><span class="st"><i class="n">3</i><b data-i18n="how3">Earth sees it after the delay</b></span><span class="nt" data-i18n="howNt"></span></div>
-  <div class="demobar" id="demoBar" hidden role="status" aria-live="polite"><span class="mono" id="demoStep"></span><span id="demoTxt"></span><button class="btn ghost" id="demoStop" type="button" data-i18n="demoStop" style="margin:0 0 0 auto">Stop</button></div>
+  <div class="demobar" id="demoBar" hidden role="status" aria-live="polite">
+    <div class="dm-top"><ol class="dm-steps" id="dmSteps"></ol><span class="dm-btns"><button class="btn ghost" id="demoNext" type="button" data-i18n="demoNext">Next ▸</button><button class="btn ghost" id="demoStop" type="button" data-i18n="demoStop">Stop</button></span></div>
+    <div class="dm-main"><span class="dm-ico" id="dmIco" aria-hidden="true"></span><div class="dm-tx"><b id="dmTitle"></b><p id="demoTxt"></p></div><span class="dm-where" id="dmWhere"></span></div>
+    <div class="dm-bar"><i id="dmFill"></i><em id="dmWait"></em></div><span id="demoStep" hidden></span>
+  </div>
 </header>
 
 <main class="app">
   <aside class="panel" id="viewAstro" aria-label="Astronaut">
     <div class="phead"><span data-i18n="pAstro">ASTRONAUT · ON BOARD</span><button class="sosb" id="sosBtn" type="button" aria-label="SOS emergency">SOS</button></div>
+    <div class="astrosel" id="astroSel" role="group" aria-label="Astronaut"></div>
     <div class="tabbar" role="tablist" data-bar="a">
       <button type="button" role="tab" aria-selected="true" data-tab="ta1" data-i18n="tbWrist">WRISTBAND</button>
       <button type="button" role="tab" aria-selected="false" data-tab="ta3" data-i18n="tbSuit">SUIT</button>
       <button type="button" role="tab" aria-selected="false" data-tab="ta2" data-i18n="tbTablet">TABLET</button>
     </div>
+    <div id="stormCd" class="stormcd" hidden role="timer" aria-live="off"></div>
     <div class="tp on" id="ta1" role="tabpanel">
       <div class="bandwrap">
         <div class="watch band" id="watch" role="img" aria-label="LED wristband">
@@ -640,13 +710,19 @@
         <defs><radialGradient id="vg" cx="40%" cy="30%"><stop offset="0" stop-color="#2a3a6a"/><stop offset="1" stop-color="#05070f"/></radialGradient></defs>
         <ellipse cx="150" cy="120" rx="112" ry="108" fill="#161b33" stroke="#3a4170" stroke-width="3"/>
         <ellipse cx="150" cy="118" rx="84" ry="70" fill="url(#vg)" stroke="#0a0d1c" stroke-width="4"/>
-        <ellipse class="vring l0" cx="150" cy="118" rx="94" ry="80"/>
+        <g class="eyex" aria-hidden="true"><path d="M106 100 L134 128 M134 100 L106 128"/><path d="M166 100 L194 128 M194 100 L166 128"/></g>
         <path d="M60 238 Q150 218 240 238 L255 428 L45 428 Z" fill="#161b33" stroke="#3a4170" stroke-width="3"/>
         <rect x="80" y="276" width="140" height="72" rx="14" fill="#05070f" stroke="#3a4170" stroke-width="2"/>
+        <rect class="vring l0" x="72" y="268" width="156" height="88" rx="20"/>
         <g class="sz l0" data-z="heart"><title>Heart</title><circle class="lc" cx="108" cy="312" r="12"/><g transform="translate(108,312) scale(0.9)" fill="#001" opacity=".85"><path d="M0 4 C-7 -4 -12 3 0 11 C12 3 7 -4 0 4 Z"/></g></g><g class="sz l0" data-z="ox"><title>Oxygen</title><circle class="lc" cx="139" cy="312" r="12"/><g transform="translate(139,312) scale(0.9)" fill="#001" opacity=".85"><path d="M0 -10 C6 -2 8 1 8 4 A8 8 0 0 1 -8 4 C-8 1 -6 -2 0 -10Z"/></g></g><g class="sz l0" data-z="temp"><title>Temperature</title><circle class="lc" cx="170" cy="312" r="12"/><g transform="translate(170,312) scale(0.9)" fill="#001" opacity=".85"><rect x="-2.5" y="-11" width="5" height="15" rx="2.5"/><circle cx="0" cy="8" r="5"/></g></g><g class="sz l0" data-z="link"><title>Link</title><circle class="lc" cx="201" cy="312" r="12"/><g transform="translate(201,312) scale(0.9)" fill="#001" opacity=".85"><g fill="none" stroke="#001" stroke-width="2.6" stroke-linecap="round"><path d="M-10 -3 A13 13 0 0 1 10 -3"/><path d="M-6 2 A8 8 0 0 1 6 2"/></g><circle cx="0" cy="8" r="2.6"/></g></g>
       </svg>
         </div>
         <div class="mono note" id="suitState" style="text-align:center;margin:4px 0 10px"></div>
+        <div class="suitbtns">
+          <button class="btn" type="button" id="sDon" data-i18n="sDon">Astronaut puts on the suit</button>
+          <button class="btn ghost" type="button" id="sDoff" data-i18n="sDoff">Astronaut takes off the suit</button>
+          <button class="btn ghost" type="button" id="sLink"></button>
+        </div>
         <div class="card" style="margin-bottom:0"><h2 data-i18n="suitH">SUIT LIGHTS</h2>
           <div class="lgd" data-i18n="suitLeg"></div>
         </div>
@@ -979,9 +1055,6 @@
     </section>
 </div><div>
 <div class="card" style="margin-bottom:18px"><h2 data-i18n="suitSimH">SUIT (SIMULATION)</h2><p class="note" data-i18n="suitSimLead"></p>
-        <button class="btn" type="button" id="sDon" data-i18n="sDon">Astronaut puts on the suit</button>
-        <button class="btn ghost" type="button" id="sDoff" data-i18n="sDoff">Astronaut takes off the suit</button>
-        <button class="btn ghost" type="button" id="sLink"></button>
         <p class="note" data-i18n="evaNote"></p></div>
 </div><div>
       <div class="card demo" style="margin-bottom:18px">
@@ -1464,6 +1537,7 @@ else if (typeof exports === 'object'){
 
     demoGo:'▶ Guided demo', demoStop:'Stop', demoEnd:'End of the demo. Use “Back to normal” in Simulation to reset.',
     demoS:['All normal: one green LED on the wristband.','A solar flare is detected (simulated here; the real feed is NASA DONKI). Red alert: the wristband vibrates and asks to go to the Storm Shelter.','In the shelter the dose drops. The planner blocks outside tasks and reassigns them.','SOS: the offline clinical guide opens at once. No waiting for Earth.','Earth receives the alerts only now, 20 minutes later, and acknowledges them.','The acknowledgement travels back with another delay: cyan light on the wristband.'],
+    demoT:['All normal','Solar storm','Storm Shelter','SOS on board','Earth finds out','Reply arrives'], demoWa:'◀ Look at the astronaut', demoWg:'Look at Earth ▶', demoNext:'Next ▸', demoWait:'Waiting for the 20-minute delay…', demoStepL:'Step', demoOf:'of',
     bandH:'WRISTBAND LEDS', alH:'ALERTS & NOTIFICATIONS', nowH:'RIGHT NOW · WHAT TO DO', nowWhy:'Why? Show the body map',
     bandLeg:'<div class="lg"><span class="dot g"></span>Green, steady: all normal</div><div class="lg"><span class="dot y"></span>Yellow, slow blink: caution</div><div class="lg"><span class="dot r"></span>Red, fast blink: critical</div><div class="lg"><span class="dot" style="background:#5b8cff"></span>Blue, double blink: a procedure is due</div><div class="lg"><span class="dot c"></span>Cyan, pulsing: message from Earth</div><div class="lg"><span class="dot w"></span>White: suit synced (blinking yellow: suit link lost)</div><p class="note">Calm = one green LED. All LEDs red and fast = SOS emergency. Only the system with a problem lights up (heart, oxygen, temperature, glucose, mind, exercise, radiation), so the lights show where, not what. There is no screen and no text: the tablet says what is happening and what to do.</p><p class="note">Two vibrations only: ALERT (1, 2 or 3 pulls, stronger as priority rises) and REMINDER (two short taps).</p>',
     tgRidge:'MODULES', simB:'SIMULATION', how1:'Load data in the dark blue bar', how2:'The astronaut reacts on board', how3:'Earth sees it after the delay', howNt:'Simulated data to show how each view behaves. Not a medical device.', dkT:'LOAD DATA', dkS:'simulated input', dkSpe:'☀ Storm', dkShel:'🛡 Shelter', dkPulse:'❤ Pulse', dkNight:'🌙 Night', dkCrew:'🤝 Crew', dkSos:'SOS', dkCalm:'↺ Calm', misH:'Missions', misRestart:'Start over', dkMore:'More controls ▴', dkLess:'Hide controls ▾', dkHelp:'Press a scenario. Left: what the astronaut gets. Right: what Earth gets, later.', tbSuit:'SUIT', suitL:'SUIT', sIn:'INSIDE', sSync:'SYNCING', sEva:'EVA',
@@ -1496,6 +1570,7 @@ else if (typeof exports === 'object'){
 
     demoGo:'▶ Demo guiada', demoStop:'Detener', demoEnd:'Fin de la demo. Usá «Volver a normal» en Simulación para reiniciar.',
     demoS:['Todo normal: un solo LED verde en la pulsera.','Se detecta una fulguración solar (simulada acá; la fuente real es NASA DONKI). Alerta roja: la pulsera vibra y pide ir al Storm Shelter.','En el refugio baja la dosis. El planificador bloquea las tareas exteriores y las reasigna.','SOS: la guía clínica offline se abre al instante. Sin esperar a la Tierra.','La Tierra recibe las alertas recién ahora, 20 minutos después, y da acuse.','El acuse vuelve con otra demora: luz cian en la pulsera.'],
+    demoT:['Todo normal','Tormenta solar','Refugio','SOS a bordo','La Tierra se entera','Llega la respuesta'], demoWa:'◀ Mirá al astronauta', demoWg:'Mirá a la Tierra ▶', demoNext:'Siguiente ▸', demoWait:'Esperando la demora de 20 minutos…', demoStepL:'Paso', demoOf:'de',
     bandH:'LEDS DE LA PULSERA', alH:'ALERTAS Y NOTIFICACIONES', nowH:'AHORA · QUÉ HACER', nowWhy:'¿Por qué? Ver el mapa del cuerpo',
     bandLeg:'<div class="lg"><span class="dot g"></span>Verde, fijo: todo normal</div><div class="lg"><span class="dot y"></span>Amarillo, parpadeo lento: precaución</div><div class="lg"><span class="dot r"></span>Rojo, parpadeo rápido: crítico</div><div class="lg"><span class="dot" style="background:#5b8cff"></span>Azul, doble destello: toca un procedimiento</div><div class="lg"><span class="dot c"></span>Cian, pulsante: mensaje de la Tierra</div><div class="lg"><span class="dot w"></span>Blanco: traje sincronizado (amarillo parpadeante: enlace con el traje perdido)</div><p class="note">En calma hay un solo LED verde. Todos los LED rojos y rápidos = emergencia SOS. Solo se enciende el sistema con problema (corazón, oxígeno, temperatura, glucosa, mente, ejercicio, radiación), así que las luces muestran dónde, no qué. No hay pantalla ni texto: la tablet dice qué pasa y qué hacer.</p><p class="note">Solo dos vibraciones: ALERTA (1, 2 o 3 tirones, más fuerte cuanto mayor la prioridad) y RECORDATORIO (dos toques cortos).</p>',
     tgRidge:'MÓDULOS', simB:'SIMULACIÓN', how1:'Cargá datos en la barra azul de abajo', how2:'El astronauta reacciona a bordo', how3:'La Tierra lo ve tras la demora', howNt:'Datos simulados para mostrar cómo se comporta cada vista. No es un dispositivo médico.', dkT:'CARGA DE DATOS', dkS:'entrada simulada', dkSpe:'☀ Tormenta', dkShel:'🛡 Refugio', dkPulse:'❤ Pulso', dkNight:'🌙 Noche', dkCrew:'🤝 Equipo', dkSos:'SOS', dkCalm:'↺ Calma', misH:'Misiones', misRestart:'Empezar de nuevo', dkMore:'Más controles ▴', dkLess:'Ocultar controles ▾', dkHelp:'Tocá un escenario. Izquierda: lo que recibe el astronauta. Derecha: lo que recibe la Tierra, después.', tbSuit:'TRAJE', suitL:'TRAJE', sIn:'EN NAVE', sSync:'SINCRONIZANDO', sEva:'EVA',
@@ -1624,7 +1699,7 @@ else if (typeof exports === 'object'){
   function levels(v, b) {
     var L = {};
     var th = SUIT.eva ? { p:[8, 16], s:[2, 4], t:[0.8, 1.6] } : { p:[10, 20], s:[3, 6], t:[1, 2] };   // EVA: umbrales mas estrictos
-    L.pulse = lv(pct(v.pulse, b.pulse), th.p);
+    L.pulse = (v === S.v && hxOn()) ? (v.pulse > 0.9 * (220 - RG.team[RG.sel].age) ? 2 : 0) : lv(pct(v.pulse, b.pulse), th.p);   // durante el ejercicio solo alerta si pasa el 90 % del maximo
     L.spo2  = lv(Math.max(0, b.spo2 - v.spo2) / b.spo2 * 100, th.s);      // solo cuenta si BAJA
     L.temp  = lv(pct(v.temp, b.temp), th.t);
     L.bp    = Math.max(lv(pct(v.sys, b.sys), [8, 16]), lv(pct(v.dia, b.dia), [10, 20]));
@@ -1670,14 +1745,16 @@ else if (typeof exports === 'object'){
   /* ================= SIMULADOR ================= */
   function ruido() { return (Math.random() - 0.5) * 2; }
   function simular() {
-    var e = S.estres;
-    return { pulse: Math.round(70 + e * 0.4 + ruido() * 3),
-             spo2: Math.round((98 - e * 0.1 + ruido() * 0.5) * 10) / 10,
-             temp: Math.round((36.6 + e * 0.02 + ruido() * 0.1) * 10) / 10 };
+    var e = S.estres, b = S.base;
+    var hw = (typeof RG !== 'undefined' && RG.hx) ? hxWork() : null, rest = (typeof RG !== 'undefined' && RG.hx) ? hxRest() : b.pulse;
+    return { pulse: hw !== null ? Math.round(hw + ruido() * 2) : Math.round(rest + e * 0.4 + ruido() * 3),
+             spo2: Math.round((b.spo2 - e * 0.1 + ruido() * 0.5) * 10) / 10,
+             temp: Math.round((b.temp + e * 0.02 + ruido() * 0.1) * 10) / 10 };
   }
 
   /* ================= RENDER ================= */
   function render() {
+    astroUi();
     var L = levels(S.v, S.base), O = overall(L);
 
     // Estado general
@@ -1792,7 +1869,7 @@ else if (typeof exports === 'object'){
   function buildReport() {
     var L = levels(S.v, S.base), O = overall(L), R = t('rep'), v = S.v;
     var flags = ORDER.filter(function (k) { return L[k] > 0; }).map(function (k) { return '- ' + (L[k] === 2 ? '[RED] ' : '[YELLOW] ') + detail(k); });
-    var lines = [R.title, new Date().toLocaleString(), '',
+    var lines = [R.title.replace('ASTRO-01', an()), new Date().toLocaleString(), '',
       R.status + ': ' + t('st')[O.nivel] + (O.combo ? ' (' + t('combo') + ')' : ''),
       R.flags + ': ' + (flags.length ? '' : R.none)].concat(flags, ['',
       R.values + ':',
@@ -1838,6 +1915,7 @@ else if (typeof exports === 'object'){
     try { localStorage.setItem("bc2-lang", l); } catch (e) {}
     render();
     try { if (RG.hab) buildRidge(); } catch (e) {}
+    try { if (DEMO) demoRender(DEMO.i); } catch (e) {}
   }
 
 
@@ -1881,7 +1959,7 @@ else if (typeof exports === 'object'){
     advance();
     var v = S.v, O = overall(levels(v, S.base));
     var row = { t: Math.round(CLK.sim), pulse: v.pulse, spo2: v.spo2, temp: v.temp, sys: v.sys, dia: v.dia, glu: v.glu,
-                sleep: v.sleep, mood: v.mood, ex: v.ex, rad: v.rad, mind: v.mind, react: v.react, eva: SUIT.eva ? 1 : 0, level: O.nivel };
+                sleep: v.sleep, mood: v.mood, ex: v.ex, rad: v.rad, mind: v.mind, react: v.react, eva: SUIT.eva ? 1 : 0, level: O.nivel, a: RG.sel };
     if (SUIT.eva && !SUIT.linkUp) { WBUF.push(row); return; }        // sin enlace con el traje: se guarda en la pulsera
     WBUF.splice(0).forEach(function (r) { Bus.pub(TOPIC, r); });
     Bus.pub(TOPIC, row);
@@ -1929,7 +2007,7 @@ else if (typeof exports === 'object'){
   function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
 
   function renderGround() {
-    var st = $('gStatus'), last = RX.length ? RX[RX.length - 1] : null, why = $('gWhy'); why.innerHTML = '';
+    var RV = RXV(), st = $('gStatus'), last = RV.length ? RV[RV.length - 1] : null, why = $('gWhy'); why.innerHTML = '';
     var live = overall(levels(S.v, S.base)).nivel;
     $('linkStat').innerHTML = t('shipStat')[6] + '<b>' + TRANSIT.length + '</b> · ' + t('shipStat')[4] + '<b>' + pending() + '</b> · ' + t('link') + ' <b>' + (CLK.up ? t('up') : t('down')) + '</b>';
     $('blk').textContent = CLK.up ? t('blkBtn') : t('rstBtn');
@@ -1956,7 +2034,7 @@ else if (typeof exports === 'object'){
         d.innerHTML = '<div class="n">' + nm(k) + '</div><div class="v">' + fmtVal(k, last.row) + '<small>' + SIG[k].u + '</small></div>'; tiles.appendChild(d); }); }
 
     // tabla de paquetes
-    var rows = RX.slice(-8).reverse();
+    var rows = RXV().slice(-8).reverse();
     $('pktTbl').innerHTML = '<thead><tr><th>' + t('thId') + '</th><th>' + t('thSent') + '</th><th>' + t('thRecv') + '</th><th>' + t('thLvl') + '</th><th>' + nm('pulse') + '</th><th>SpO2</th><th>' + nm('temp') + '</th><th>' + nm('bp') + '</th></tr></thead><tbody>' +
       rows.map(function (x) { var r = x.row; return '<tr><td>' + r.id + (r.eva ? ' EVA' : '') + '</td><td>' + fmtMET(r.t) + '</td><td>' + fmtMET(x.rxAt) + '</td><td class="' + ['g','y','r'][r.level] + '">' + t('st')[r.level] + '</td><td>' + r.pulse + '</td><td>' + r.spo2.toFixed(1) + '</td><td>' + r.temp.toFixed(1) + '</td><td>' + r.sys + '/' + r.dia + '</td></tr>'; }).join('') + '</tbody>';
 
@@ -1975,7 +2053,7 @@ else if (typeof exports === 'object'){
   function drawGround() {
     var k = $('gSel').value || 'pulse', c = $('gChart'), g = c.getContext('2d'), w = c.width, h = c.height;
     g.clearRect(0, 0, w, h);
-    var d = RX.slice(-30).map(function (x) { return rowVal(x.row, k); }); if (d.length < 2) return;
+    var d = RXV().slice(-30).map(function (x) { return rowVal(x.row, k); }); if (d.length < 2) return;
     var b = k === 'bp' ? S.base.sys : S.base[k];
     var mn = Math.min.apply(null, d), mx = Math.max.apply(null, d);
     if (b !== undefined) { mn = Math.min(mn, b); mx = Math.max(mx, b); }
@@ -1996,9 +2074,9 @@ else if (typeof exports === 'object'){
       b.addEventListener('click', function () { $('msgTxt').value = x; }); pre.appendChild(b); });
   }
   function renderGroundMgmt() {
-    var sig = RXAL.map(function (a) { return a.row.id + (a.acked ? 'a' : 'n'); }).join(',') + S.lang;
+    var sig = RXALV().map(function (a) { return a.row.id + (a.acked ? 'a' : 'n'); }).join(',') + S.lang;
     if (sig === alSig) return; alSig = sig;
-    $('gAlerts').innerHTML = RXAL.length ? RXAL.slice().reverse().map(function (a, i) {
+    $('gAlerts').innerHTML = RXALV().length ? RXALV().slice().reverse().map(function (a, i) {
       var L = levels(a.row, S.base), fl = ORDER.filter(function (k) { return L[k] > 0; }).map(nm).join(', ');
       return '<div class="m' + (a.row.level === 2 ? '' : ' wait') + '"><b class="' + ['g','y','r'][a.row.level] + '">' + t('st')[a.row.level] + '</b> · ' + esc(fl) + '<small>' + t('thSent') + ' ' + fmtMET(a.row.t) + ' · ' + t('thRecv') + ' ' + fmtMET(a.rxAt) + '</small>' +
         (a.acked ? '<small>' + t('ackDone') + '</small>' : '<button class="btn ghost" type="button" data-ack="' + a.row.id + '" style="margin-top:6px">' + t('ackBtn') + '</button>') + '</div>'; }).join('') : '<p class="note">' + t('gAlNone') + '</p>';
@@ -2020,6 +2098,8 @@ else if (typeof exports === 'object'){
 
 
   /* ================= PULSERA / SMARTWATCH ================= */
+  function RXV() { return RX.filter(function (x) { return x.row.a === RG.sel; }); }
+  function RXALV() { return RXAL.filter(function (x) { return x.row.a === RG.sel; }); }
   var WC = { i:0 }, GCFG = {}, RXAL = [], lastRxLvl = 0, mgSig = '', alSig = '';
   var W = { page:'tasks', key:null, vals:{}, q:null, rt:null, br:null, toast:null, tmo:null, tick:0 };
   var NOTIF = [], nid = 1, HAP = true, SND = false, actx = null, PREV = null, LASTN = {};
@@ -2292,13 +2372,16 @@ else if (typeof exports === 'object'){
   }
 
   // ---- alertas automaticas y recordatorios ----
+  /* Humor: sin refugio y sin tiempo seguro, aparecen y desaparecen cruces en los ojos; si las particulas llegan y sigue afuera, pierde el sentido (cruces fijas)
+     hasta reiniciar. Cada astronauta tiene su propio estado. */
+  function nearDeath() { var sp = typeof RG !== 'undefined' && RG.spe; return !!(sp && sp.ph === 'warn' && !RG.shelter && sp.arrive - CLK.sim - REACH <= 0); }
   function renderSuit() {
     var el = $('suit'); if (!el) return;
     var L = levels(S.v, S.base), eva = SUIT.eva;
     var zl = { heart: eva ? L.pulse : 0, ox: eva ? L.spo2 : 0, temp: eva ? L.temp : 0, link: SUIT.linkUp ? 0 : 1 };
     var ov = Math.max(eva ? overall(L).nivel : 0, zl.link);
     if (SUIT.flash === 'info' && performance.now() > SUIT.flashUntil) SUIT.flash = null;
-    el.setAttribute('class', 'suit ' + (SUIT.state === 'off' ? 'off' : (SUIT.state === 'sync' ? 'syncing' : 'on')) + (SUIT.flash === 'info' ? ' fl-info' : ''));
+    el.setAttribute('class', 'suit ' + (SUIT.state === 'off' ? 'off' : (SUIT.state === 'sync' ? 'syncing' : 'on')) + (SUIT.flash === 'info' ? ' fl-info' : '') + (RG.faint ? ' dead' : (nearDeath() ? ' dying' : '')));
     el.querySelectorAll('.sz').forEach(function (z) { z.setAttribute('class', 'sz l' + zl[z.dataset.z]); });
     el.querySelector('.vring').setAttribute('class', 'vring l' + ov);
     $('suitState').textContent = t('suitStateTxt')[SUIT.state === 'off' ? 0 : (SUIT.state === 'sync' ? 1 : 2)];
@@ -2308,7 +2391,9 @@ else if (typeof exports === 'object'){
   function donSuit() {
     if (SUIT.state !== 'off') return;
     SUIT.state = 'sync'; goTab('ta3'); haptic(0, 0); renderSuit(); renderMbar();
+    var who = RG.sel;
     setTimeout(function () {
+      if (RG.sel !== who) { RG.team[who].suit = { state:'eva', eva:true, linkUp:true }; return; }
       SUIT.state = 'eva'; SUIT.eva = true; PREV = null;
       notify({ type:'msg', sev:0, sys:true, title:t('suitSync'), body:t('suitSyncB') }); render();
     }, 3000);
@@ -2400,10 +2485,27 @@ else if (typeof exports === 'object'){
   /* ================= DEMO GUIADA ================= */
   var DEMO = null;
   function goG(id) { var bar = document.querySelector('[data-bar=g]'), b = bar && bar.querySelector('[data-tab=' + id + ']'); if (b) showTab(bar, b); }
-  function demoSay(i) { DEMO.i = i; DEMO.ts = performance.now(); $('demoStep').textContent = (i + 1) + '/6'; $('demoTxt').textContent = t('demoS')[i]; }
-  function stopDemo() { if (DEMO) clearInterval(DEMO.iv); DEMO = null; $('demoBar').hidden = true; }
+  var DEMO_ICO = ['🟢', '☀', '🛡', '🆘', '🌍', '✉'], DEMO_WH = ['a', 'a', 'g', 'a', 'g', 'a'], DEMO_DUR = [9, 14, 14, 14, 0, 0];
+  function demoHl(w) { document.body.classList.toggle('demo-on', !!w); var A = $('viewAstro'), G = $('viewGround'); A.classList.toggle('demo-hl', w === 'a'); G.classList.toggle('demo-hl', w === 'g'); }
+  function demoRender(i) {
+    var done = i >= 6, T3 = t('demoT'), fill = $('dmFill'), n = Math.min(i, 5);
+    $('dmSteps').innerHTML = T3.map(function (x, k) { return '<li class="' + (done || k < i ? 'done' : (k === i ? 'now' : '')) + '"><i>' + (done || k < i ? '✓' : (k + 1)) + '</i><span>' + x + '</span></li>'; }).join('');
+    $('demoStep').textContent = done ? '✓' : (i + 1) + '/6';
+    $('dmIco').textContent = done ? '✓' : DEMO_ICO[n];
+    $('dmTitle').textContent = done ? t('demoStepL') + ' ' + 6 + ' ' + t('demoOf') + ' 6' : t('demoStepL') + ' ' + (i + 1) + ' ' + t('demoOf') + ' 6 · ' + T3[i];
+    $('demoTxt').textContent = done ? t('demoEnd') : t('demoS')[i];
+    $('dmWhere').textContent = done ? '' : (DEMO_WH[i] === 'a' ? t('demoWa') : t('demoWg'));
+    $('dmWhere').hidden = done; demoHl(done ? '' : DEMO_WH[i]);
+    var wait = !done && !DEMO_DUR[i]; $('demoBar').classList.toggle('dm-wait', wait);
+    if (wait) $('dmWait').textContent = t('demoWait');
+  }
+  function demoSay(i) {
+    DEMO.i = i; DEMO.ts = performance.now(); demoRender(i);
+    var f = $('dmFill'); f.style.animation = 'none'; void f.offsetWidth; f.style.animation = DEMO_DUR[i] ? 'dmfill ' + DEMO_DUR[i] + 's linear forwards' : 'none';
+  }
+  function stopDemo() { if (DEMO) clearInterval(DEMO.iv); DEMO = null; $('demoBar').hidden = true; demoHl(''); }
   function startDemo() {
-    stopDemo();
+    stopDemo(); if (RG.sel !== 0) switchAstro(0);
     var nom = document.querySelector('[data-preset=nominal]'); if (nom) nom.click();
     S.v.mind = 0; PREV = null; UNREADMSG = false; TASKORDER.forEach(function (k) { TS[k].pending = false; TS[k].force = false; TS[k].due = CLK.sim + 6 * 3600; });
     if (SUIT.state !== 'off') doffSuit();
@@ -2421,15 +2523,17 @@ else if (typeof exports === 'object'){
     if (!DEMO) return;
     var el = (performance.now() - DEMO.ts) / 1000, i = DEMO.i;
     var arrived = RX.some(function (x) { return x.row.t >= DEMO.t0 && x.row.level > 0; });
-    if (i === 0 && el > 4) { raAct('spe'); demoSay(1); }
-    else if (i === 1 && el > 6) { RG.shelter = true; ridgeStep(); buildRidge(); demoSay(2); }
-    else if (i === 2 && el > 7) { sosStart(); demoSay(3); }
-    else if (i === 3 && el > 7) { sosEnd(); goG('tg1'); demoSay(4); }
-    else if (i === 4 && ((arrived && el > 4) || el > 50)) { var b = $('gAlerts').querySelector('[data-ack]'); if (b) b.click(); goTab('ta1'); demoSay(5); }
-    else if (i === 5 && ((UNREADMSG && el > 3) || el > 50)) { DEMO.ts = performance.now(); DEMO.i = 6; $('demoStep').textContent = '✓'; $('demoTxt').textContent = t('demoEnd'); }
-    else if (i === 6 && el > 10) stopDemo();
+    if (i === 0 && el > 9) { raAct('spe'); demoSay(1); }
+    else if (i === 1 && el > 14) { RG.shelter = true; ridgeStep(); buildRidge(); demoSay(2); }
+    else if (i === 2 && el > 14) { sosStart(); demoSay(3); }
+    else if (i === 3 && el > 14) { sosEnd(); goG('tg1'); demoSay(4); }
+    else if (i === 4 && ((arrived && el > 10) || el > 60)) { var b = $('gAlerts').querySelector('[data-ack]'); if (b) b.click(); goTab('ta1'); demoSay(5); }
+    else if (i === 5 && ((UNREADMSG && el > 10) || el > 60)) { DEMO.ts = performance.now(); DEMO.i = 6; var f6 = $('dmFill'); f6.style.animation = 'none'; demoRender(6); }
+    else if (i === 6 && el > 20) stopDemo();
   }
-  $('demoGo').addEventListener('click', startDemo); $('demoStop').addEventListener('click', stopDemo);
+  $('stormCd').addEventListener('click', function (e) { if (e.target.closest('[data-cd=in]') && !RG.shelter && !RG.faint) raAct('shelter'); });
+  $('astroSel').addEventListener('click', function (e) { var b = e.target.closest('[data-ai]'); if (b) switchAstro(+b.dataset.ai); });
+  $('demoNext').addEventListener('click', function () { if (DEMO && DEMO.i < 6) DEMO.ts -= 60000; }); $('demoGo').addEventListener('click', startDemo); $('demoStop').addEventListener('click', stopDemo);
   $('sDon').addEventListener('click', donSuit); $('sDoff').addEventListener('click', doffSuit); $('sLink').addEventListener('click', function () { setSuitLink(!SUIT.linkUp); });
   $('dPulse').addEventListener('click', function () { setMode('manual'); S.v.pulse = 96; S.v.spo2 = 96.5; syncInputs(); render(); checkAlerts(true); });
   $('dBp').addEventListener('click', function () { demoTask('bp'); });
@@ -2471,7 +2575,8 @@ else if (typeof exports === 'object'){
   var RG = {
     last:CLK.sim, pane:'ov', day0:240, mlen:900, dec:[], decN:0, noted:{}, recs:[], lv:{ R:0, I:0, D:0, G:0, E:0 }, radLvl:0, modLvl:0,
     career:300, mission:0, bk:[], d24:0, shelter:false, spe:null, cap:5, nutri:false, ext:85, eff:85,
-    crew:[{ n:'ASTRO-02', c:210, rest:true }, { n:'ASTRO-03', c:330, rest:false }, { n:'ASTRO-04', c:150, rest:true }],
+    sel:0, team:[],
+    tens:{ '0-1':35, '0-2':72, '0-3':18, '1-2':22, '1-3':58, '2-3':41 },
     nights:[7.2, 6.8, 7.5], noise:{ cab:38, com:44 }, vr:null, snd:null, sos:null, sosSel:'faint',
     diary:[], dKey:null, dFlag:0, dLast:'', coordOk:null, coordBase:0, coordMs:0,
     water:{ vol:2.1, ph:6.2, ca:180 }, waterGoal:2.5,
@@ -2604,9 +2709,17 @@ else if (typeof exports === 'object'){
     if (mp >= 50 && mp < 75 && !RG.noted.q3m) { RG.noted.q3m = 1; notify({ type:'msg', sev:0, title:qq('Mission milestone', 'Hito de la misión'), body:qq('Third quarter: a message from home and a new course are unlocked.', 'Tercer cuarto: se desbloquea un mensaje de casa y un curso nuevo.') }); }
     RG.plan = planner(L);
   }
+  /* Planificador: usa los MISMOS datos que el resto de la app para cada astronauta (dosis y refugio, sueno, prueba de coordinacion, cabina de descanso y tension).
+     Fatiga = reaccion lenta o prueba de coordinacion fallida o CO2 alto en la cabeza al dormir o menos de 5,5 h la ultima noche.  Deuda de sueno = dos noches seguidas bajo 6 h. */
+  function ten(a, b) { return RG.tens[Math.min(a, b) + '-' + Math.max(a, b)]; }
+  function mem(i, L) {
+    var t = RG.team[i], act = i === RG.sel, H = act ? RG.hab : t.hab, n = act ? RG.nights : t.nights, cabin = H.sleep && H.head > 2500;
+    var c = act ? RG.career + RG.mission : t.c + t.mis;
+    return { i:i, n:t.n, c:c, p:c / 6, d24:act ? RG.d24 : t.d24, tired:(act ? (L.react > 0 || RG.coordOk === false) : t.coordOk === false) || cabin || n[2] < 5.5, debt:n[1] < 6 && n[2] < 6, eva:act ? SUIT.eva : t.suit.eva };
+  }
   function planner(L) {
-    var pct = (RG.career + RG.mission) / 6, sp = RG.spe, storm = !!(sp && (sp.ph === 'warn' || sp.ph === 'storm'));
-    var radBlock = pct >= 75 || RG.d24 >= RG.cap || storm, tired = L.react > 0 || RG.coordOk === false, debt = sleepDebt();
+    var sp = RG.spe, storm = !!(sp && (sp.ph === 'warn' || sp.ph === 'storm')), all = [0, 1, 2, 3].map(function (i) { return mem(i, L); }), me = all[RG.sel], used = {};
+    var radBlock = me.p >= 75 || me.d24 >= RG.cap || storm;
     var tasks = [
       { n:qq('EVA: external inspection', 'EVA: inspección exterior'), ext:true, risk:true }, { n:qq('Solar panel check (outside)', 'Revisión de paneles solares (exterior)'), ext:true },
       { n:qq('Robotic arm maneuver', 'Maniobra del brazo robótico'), risk:true }, { n:qq('Docking operations', 'Operaciones de acople'), risk:true },
@@ -2614,41 +2727,109 @@ else if (typeof exports === 'object'){
     ];
     return tasks.map(function (tk) {
       var why = [];
-      if (tk.ext && radBlock) why.push(storm ? qq('solar storm', 'tormenta solar') : (pct >= 75 ? qq('radiation budget ≥75%', 'presupuesto de radiación ≥75%') : qq('daily dose cap', 'tope diario de dosis')));
-      if (tk.risk && tired) why.push(qq('fatigue / coordination', 'fatiga / coordinación'));
-      if (tk.load && debt) why.push(qq('sleep debt', 'deuda de sueño'));
-      if (!why.length) return { n:tk.n, ok:true, who:'ASTRO-01' };
-      var cand = RG.crew.filter(function (c) { return (!tk.ext || c.c / 6 < 75) && (!tk.risk || c.rest); }).sort(function (x, y) { return x.c - y.c; })[0];
-      if (tk.ext && storm) cand = null;
-      return { n:tk.n, ok:false, why:why.join(' + '), who:cand ? cand.n + ' (' + Math.round(cand.c / 6) + '%)' : null };
+      if (tk.ext && radBlock) why.push(storm ? qq('solar storm', 'tormenta solar') : (me.p >= 75 ? qq('radiation budget ≥75%', 'presupuesto de radiación ≥75%') : qq('daily dose cap', 'tope diario de dosis')));
+      if (tk.risk && me.tired) why.push(qq('fatigue / coordination', 'fatiga / coordinación'));
+      if (tk.load && me.debt) why.push(qq('sleep debt', 'deuda de sueño'));
+      if (!why.length) return { n:tk.n, ok:true, who:me.n };
+      if (tk.ext && storm) return { n:tk.n, ok:false, why:why.join(' + '), who:null };
+      var cands = all.filter(function (m) { return m.i !== me.i && (!tk.ext || (m.p < 75 && m.d24 < RG.cap)) && (!tk.risk || !m.tired) && (!tk.load || !m.debt); })
+        .sort(function (x, y) { return (x.p + 0.4 * ten(me.i, x.i)) - (y.p + 0.4 * ten(me.i, y.i)); });
+      var c = cands.filter(function (m) { return !used[m.i]; })[0] || cands[0];
+      if (c) used[c.i] = 1;
+      return { n:tk.n, ok:false, why:why.join(' + '), who:c ? c.n + ' (' + Math.round(c.p) + '% · ' + qq('tension', 'tensión') + ' ' + ten(me.i, c.i) + ')' : null, wi:c ? c.i : -1 };
     });
+  }
+  function profPane() {
+    var i = RG.sel, h = rsl('career', qq('Career dose', 'Dosis de carrera'), 0, 600, 5, ' mSv') + rsl('team.' + i + '.x', qq('Workplace exposure', 'Exposición de su puesto'), 0.5, 1.5, 0.05, '×') +
+      rsl('nights.1', qq('Sleep, night before last', 'Sueño, anteanoche'), 0, 10, 0.1, ' h') + rsl('nights.2', qq('Sleep, last night', 'Sueño, anoche'), 0, 10, 0.1, ' h');
+    [0, 1, 2, 3].forEach(function (j) { if (j !== i) h += rsl('tens.' + Math.min(i, j) + '-' + Math.max(i, j), qq('Tension with ', 'Tensión con ') + RG.team[j].n, 0, 100, 1, ''); });
+    return h;
+  }
+  /* ===== radiacion: temporizador, tiempo hasta el limite y frecuencia de tormentas =====
+     Datos reales usados (ver "¿Como se calcula?" en la app):
+     - NASA-STD-3001: limite de carrera 600 mSv; limite por evento de particulas solares (SPE) 250 mSv.
+     - NOAA SWPC (escala S): S3 o mayor = 10 eventos por ciclo solar de 11 anos; S4 = 3; S5 = menos de 1.
+     - Sensor RAD de Curiosity en el viaje a Marte: 1,84 mSv/dia (~77 uSv/h). */
+  var REACH = 300, WIN0 = 1800, CAR_LIM = 600, EV_LIM = 250, S3_PER_DAY = 10 / (11 * 365.25);
+  function mmss(x) { x = Math.max(0, Math.ceil(x)); var m = Math.floor(x / 60), r = x % 60; return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r; }
+  function fmtH(h) {
+    if (!isFinite(h)) return '—'; if (h <= 0) return qq('exceeded', 'superado');
+    if (h < 1) return Math.max(1, Math.round(h * 60)) + ' min';
+    if (h < 48) return Math.floor(h) + ' h ' + Math.round((h % 1) * 60) + ' min';
+    return Math.round(h / 24) + ' ' + qq('days', 'días');
+  }
+  function pS3(days) { return 100 * (1 - Math.exp(-S3_PER_DAY * days)); }
+  function radLimit() {
+    var tot = RG.career + RG.mission, r = Math.max(RG.eff, 1) / 1000, sp = RG.spe && RG.spe.ph === 'storm' ? RG.spe : null;
+    var tCar = tot >= CAR_LIM ? 0 : (CAR_LIM - tot) / r, tDay = RG.d24 >= RG.cap ? 0 : ((RG.cap - RG.d24) / r <= 24 ? (RG.cap - RG.d24) / r : Infinity), tEv = sp ? Math.max(0, (EV_LIM - (sp.dose || 0)) / r) : Infinity;
+    var h = Math.min(tCar, tDay, tEv), kind = h === tEv ? 'ev' : (h === tDay ? 'day' : 'car');
+    var what = { ev:qq('the 250 mSv limit for this storm', 'el límite de 250 mSv de esta tormenta'), day:qq('the daily cap (' + RG.cap + ' mSv)', 'el tope diario (' + RG.cap + ' mSv)'), car:qq('the 600 mSv career limit', 'el límite de carrera de 600 mSv') }[kind];
+    return { h:h, kind:kind, what:what, tot:tot, ev:sp ? (sp.dose || 0) : 0 };
+  }
+  function stormCd() {
+    var el = $('stormCd'), sp = RG.spe; if (!el) return;
+    var L = radLimit(), left = sp && sp.ph === 'warn' ? sp.arrive - CLK.sim : 0, safe = left - REACH, lvl, t, n, big, btn = '', pct;
+    var go = RG.faint ? '<button type="button" class="btn" disabled>' + qq('😵 Passed out', '😵 Sin sentido') + '</button>' : '<button type="button" class="btn" data-cd="in">' + qq('I am in the shelter', 'Ya estoy en el refugio') + '</button>';
+    if (sp && RG.shelter) { lvl = 'ok'; t = qq('IN THE SHELTER', 'EN EL REFUGIO'); big = '✓'; pct = 100; n = sp.ph === 'warn' ? qq('Particles arrive in ', 'Las partículas llegan en ') + mmss(left) + qq('. Stay inside.', '. Quedate adentro.') : qq('Storm in progress. Stay inside until the alert clears.', 'Tormenta en curso. Quedate adentro hasta que termine la alerta.'); }
+    else if (sp && sp.ph !== 'warn') { lvl = 'bad'; t = qq('PARTICLES HAVE ARRIVED', 'LAS PARTÍCULAS YA LLEGARON'); big = '00:00'; pct = 0; n = RG.faint ? qq('Time ran out outside: ' + an() + ' passed out (simulation). Reset to start over.', 'Se acabó el tiempo afuera: ' + an() + ' perdió el sentido (simulación). Reiniciá para empezar de nuevo.') : qq('Go to the Storm Shelter now.', 'Andá al Storm Shelter ya.'); btn = go; }
+    else if (sp) { lvl = safe <= 0 ? 'bad' : (safe < 600 ? 'warn' : 'ok'); pct = Math.max(0, Math.min(100, safe / (WIN0 - REACH) * 100)); t = safe > 0 ? qq('SAFE TIME TO REACH THE SHELTER', 'TIEMPO SEGURO PARA LLEGAR AL REFUGIO') : qq('GO NOW', 'ANDÁ YA'); big = mmss(Math.max(0, safe)); n = qq('Particles arrive in ', 'Las partículas llegan en ') + mmss(left) + ' · ' + qq('shelter ' + (REACH / 60) + ' min away', 'refugio a ' + (REACH / 60) + ' min'); btn = go; }
+    else if (L.h < 24) { lvl = L.h < 2 ? 'bad' : 'warn'; t = qq('CLOSE TO A RADIATION LIMIT', 'CERCA DE UN LÍMITE DE RADIACIÓN'); big = fmtH(L.h); pct = Math.max(0, Math.min(100, L.h / 24 * 100)); n = qq('At this rate you reach ', 'Al ritmo actual llegás a ') + L.what + '.'; }
+    else { if (!el.hidden) { el.hidden = true; el._h = ''; } return; }
+    var h = '<div class="cdbox ' + lvl + '"><div class="cdl"><div class="cdt">' + t + '</div><div class="cdn">' + n + '</div></div><div class="cdb">' + big + '</div>' + btn + '<div class="cdbar"><i style="width:' + pct.toFixed(1) + '%"></i></div></div>';
+    if (el._h !== h) { el._h = h; el.innerHTML = h; } el.hidden = false;
+  }
+  function radUpd() {
+    if (!$('o_rad')) return;
+    var L = radLimit(), sp = RG.spe, ext = RG.ext, w = S.v.rad >= 60 ? qq('dangerous', 'peligrosa') : (S.v.rad >= 20 ? qq('raised', 'elevada') : qq('normal for deep space', 'normal en el espacio profundo'));
+    var lv = RG.lv.R, st = sp && sp.ph === 'warn' ? qq('Storm coming: go to the shelter before the particles arrive.', 'Tormenta en camino: andá al refugio antes de que lleguen las partículas.') : (sp ? (RG.shelter ? qq('Storm in progress. You are protected: stay inside.', 'Tormenta en curso. Estás protegido: quedate adentro.') : qq('Storm in progress. Go to the shelter now.', 'Tormenta en curso. Andá al refugio ya.')) : (lv === 0 ? qq('Radiation is under control.', 'La radiación está bajo control.') : qq('Radiation is high. Avoid tasks outside the habitat.', 'La radiación está alta. Evitá las tareas fuera del hábitat.')));
+    var limLv = L.h < 2 ? 2 : (L.h < 24 ? 1 : 0), fl = null;
+    if (RG.donki && RG.donki.ev) RG.donki.ev.some(function (e) { var c = e.c || '', n = parseFloat(c.slice(1)) || 0; if (c[0] === 'X' || (c[0] === 'M' && n >= 5)) { fl = e; return true; } return false; });
+    var fh = fl ? '<div class="rrow"><span>' + qq('Last strong flare (NASA DONKI, M5 or X)', 'Última fulguración fuerte (NASA DONKI, M5 o X)') + '</span><b>' + fl.c + ' · ' + qq('', 'hace ') + Math.max(0, Math.round((Date.now() - Date.parse(fl.t)) / 86400000)) + qq(' days ago', ' días') + '</b></div>' : '';
+    rset('o_rad', '<div class="habst l' + lv + '">' + lvDot(lv) + '<b>' + st + '</b></div>' +
+      '<div class="rrow"><span>' + qq('Radiation now', 'Radiación ahora') + ' (' + w + ')</span><b>' + Math.round(ext) + ' µSv/h ≈ ' + (ext * 24 / 1000).toFixed(1) + ' mSv/' + qq('day', 'día') + '</b></div>' +
+      '<div class="rrow l' + limLv + '"><span>' + qq('Time until you pass a limit', 'Tiempo hasta pasarte de un límite') + '<small>' + qq('nearest: ', 'el más cercano: ') + L.what + '</small></span><b>' + fmtH(L.h) + '</b></div>' +
+      (sp && sp.ph === 'storm' ? '<div class="rrow"><span>' + qq('Dose of this storm', 'Dosis de esta tormenta') + '</span><b>' + L.ev.toFixed(1) + ' / ' + EV_LIM + ' mSv</b></div>' : '') +
+      '<div class="rrow rcol"><span>' + qq('Big storm (S3 or more)', 'Tormenta grande (S3 o más)') + '<small>' + qq('average: one every ', 'en promedio: una cada ') + (1 / S3_PER_DAY / 30.44).toFixed(0) + qq(' months (NOAA). Chance of at least one in:', ' meses (NOAA). Chance de al menos una en:') + '</small></span><div class="chips3">' + [7, 30, 180].map(function (d) { return '<em>' + d + ' ' + qq('days', 'días') + '<b>' + (d < 100 ? pS3(d).toFixed(1) : pS3(d).toFixed(0)) + '%</b></em>'; }).join('') + '</div></div>' + fh);
   }
   function ridgeStep() {
     var dt = CLK.sim - RG.last; RG.last = CLK.sim; if (dt < 0) dt = 0;
     var sp = RG.spe;
     if (sp) {
-      if (sp.ph === 'warn' && CLK.sim >= sp.arrive) { sp.ph = 'storm'; sp.t1 = CLK.sim; }
+      if (sp.ph === 'warn' && CLK.sim >= sp.arrive) {
+        sp.ph = 'storm'; sp.t1 = CLK.sim;
+        RG.team.forEach(function (q, j) { if (j !== RG.sel) q.shelter = true; });          // el resto sigue el protocolo y ya esta refugiado
+        if (!RG.shelter) { RG.faint = true; decide(qq(an() + ' did not reach the shelter in time and passed out (simulated). Reset to continue.', an() + ' no llegó al refugio a tiempo y perdió el sentido (simulado). Reiniciá para continuar.')); renderSuit(); }
+      }
       if (sp.ph === 'storm') {
         var rate = 50 + (sp.peak - 50) * Math.exp(-(CLK.sim - sp.t1) / 7200);
         S.v.rad = Math.max(0, Math.min(100, Math.round(100 * Math.log(rate / 50) / Math.log(200))));
         if ($('rad')) { $('rad').value = S.v.rad; $('vRad').textContent = S.v.rad + '%'; }
         if (S.v.rad < 60) {
-          RG.spe = null; RG.noted.spe = 0;
+          RG.spe = null; RG.noted.spe = 0; RG.faint = false;
           notify({ type:'msg', sev:0, title:qq('Safe zone', 'Zona segura'), body:qq('Safe zone: normal operations resumed. You can leave the shelter.', 'Zona segura: operaciones normales reanudadas. Podés salir del refugio.') });
           decide(qq('Radiation: dose rate fell below the danger threshold. Red alert closed automatically.', 'Radiación: la tasa de dosis bajó del umbral de peligro. Alerta roja cerrada automáticamente.'));
         }
       }
     }
-    RG.ext = 50 * Math.pow(200, S.v.rad / 100); RG.eff = RG.ext * (RG.shelter ? 0.1 : 1);
-    var dd = RG.eff * dt / 3600 / 1000; RG.mission += dd;
+    RG.ext = 50 * Math.pow(200, S.v.rad / 100); RG.eff = RG.ext * (RG.shelter ? 0.1 : 1) * RG.team[RG.sel].x;
+    var dd = RG.eff * dt / 3600 / 1000; RG.mission += dd; if (RG.spe && RG.spe.ph === 'storm') RG.spe.dose = (RG.spe.dose || 0) + dd;
     var key = Math.floor(CLK.sim / 60), lb = RG.bk[RG.bk.length - 1];
     if (lb && lb.k === key) lb.d += dd; else RG.bk.push({ k:key, t:CLK.sim, d:dd });
     while (RG.bk.length && RG.bk[0].t < CLK.sim - 86400) RG.bk.shift();
     RG.d24 = dose24();
+    if (RG.spe && RG.spe.ph === 'storm' && !RG.spe.evInit) { RG.spe.evInit = 1; RG.spe.dose = 0; RG.team.forEach(function (q) { q.evd = 0; }); }
+    RG.team.forEach(function (q, j) {     // los otros astronautas tambien reciben radiacion (en tormenta siguen el protocolo y se refugian)
+      if (j === RG.sel) return;
+      var storm = RG.spe && RG.spe.ph === 'storm', dj = RG.ext * (storm ? 0.1 : 1) * q.x * dt / 3600 / 1000, kk = Math.floor(CLK.sim / 60), lq = q.bk[q.bk.length - 1];
+      q.mis += dj; if (storm) q.evd += dj;
+      if (lq && lq.k === kk) lq.d += dj; else q.bk.push({ k:kk, t:CLK.sim, d:dj });
+      while (q.bk.length && q.bk[0].t < CLK.sim - 86400) q.bk.shift();
+      q.d24 = q.bk.reduce(function (a, b) { return a + b.d; }, 0);
+    });
     RG.hepa.h += dt / 3600; RG.wl.h += dt / 3600;
     if (RG.vr && CLK.sim - RG.vr.t0 >= 900) { RG.vr = null; decide(qq('Isolation: 15-minute VR session completed.', 'Aislamiento: sesión de VR de 15 minutos completada.')); }
     var prev = RG.recs.length + ':' + RG.radLvl + ':' + RG.modLvl;
-    habStep(dt); frStep(dt);
+    RG.team.forEach(function (q, j) { habStep(dt, q.hab, j === RG.sel); }); frStep(dt); hxSample(); stormCd();
     rEval(); rUpd();
     if (prev !== RG.recs.length + ':' + RG.radLvl + ':' + RG.modLvl) { render(); renderWatch(true); }
   }
@@ -2656,10 +2837,73 @@ else if (typeof exports === 'object'){
   /* ===== HABITAT EMPATICO: el cuerpo maneja la nave (simulado) ===== */
   function habNew() { return { sleep:false, auto:true, head:800, cab:800, src:1.8, need:180, fan:20, fanCmd:false, rr:13, pulse:54, hrv:62, temp:21.5, cct:3000, sym:0, ph:'idle', msgs:[], det:0 }; }
   function frNew() { return { alone:0, stress:0, together:90, idx:0, acts:0, plan:[], sent:false }; }
-  RG.hab = habNew(); RG.fr = frNew();
-  function habPub(topic, payload) { RG.hab.msgs.unshift({ t:CLK.sim, topic:topic, payload:payload }); if (RG.hab.msgs.length > 6) RG.hab.msgs.pop(); }
-  function habStep(dt) {
-    var H = RG.hab, n = Math.max(1, Math.ceil(dt / 20)), i;
+  /* ===== TRIPULACION: 4 astronautas con datos propios. Todo lo que es "de una persona" se intercambia al elegir a otro:
+     signos y valores basales, pulsera, traje, avisos, tareas, dosis, sueno, habitat y relaciones. La radiacion de la nave es comun. ===== */
+  var TENS0 = { '0-1':35, '0-2':72, '0-3':18, '1-2':22, '1-3':58, '2-3':41 };
+  var AST0 = [
+    { n:'ASTRO-01', r:['Commander', 'Comandante'], x:1.00, c0:300, age:41, hrv0:62, base:{ pulse:70, spo2:98, temp:36.6, sys:120, dia:80, glu:90 }, v:{ sleep:7.5, mood:8, ex:130 }, nights:[7.2, 6.8, 7.5] },
+    { n:'ASTRO-02', r:['Flight engineer', 'Ingeniera de vuelo'], x:0.85, c0:210, age:36, hrv0:71, base:{ pulse:64, spo2:99, temp:36.4, sys:112, dia:74, glu:84 }, v:{ sleep:5.9, mood:7, ex:95 }, nights:[6.4, 5.6, 5.9] },
+    { n:'ASTRO-03', r:['Medical officer', 'Médico'], x:1.20, c0:330, age:45, hrv0:49, base:{ pulse:76, spo2:97, temp:36.8, sys:126, dia:83, glu:96 }, v:{ sleep:5.2, mood:5, ex:60 }, nights:[6.9, 5.7, 5.2] },
+    { n:'ASTRO-04', r:['Pilot', 'Piloto'], x:1.10, c0:460, age:38, hrv0:80, base:{ pulse:58, spo2:98.5, temp:36.5, sys:118, dia:78, glu:88 }, v:{ sleep:6.6, mood:9, ex:150 }, nights:[7.8, 7.1, 6.6] }
+  ];
+  function an() { return RG.team[RG.sel].n; }
+  function setHab(h) { RG.hab = RG.team[RG.sel].hab = h; }
+  function setFr(f) { RG.fr = RG.team[RG.sel].fr = f; }
+  function mkAst(a) {
+    var ts = {}, hist = {}, v = { pulse:a.base.pulse + 2, spo2:a.base.spo2, temp:a.base.temp, sys:a.base.sys, dia:a.base.dia, glu:a.base.glu, sleep:a.v.sleep, mood:a.v.mood, ex:a.v.ex, mind:0, react:0 };
+    TASKORDER.forEach(function (k) { ts[k] = { due:CLK.sim + TDEF[k].due, pending:false, since:0, over:false }; });
+    ORDER.forEach(function (k) { hist[k] = []; for (var q = 0; q < 30; q++) hist[k].push(k === 'bp' ? v.sys : (k === 'rad' ? S.v.rad : v[k])); });
+    return { n:a.n, role:a.r, age:a.age, hrv0:a.hrv0, hx:hxNew(), x:a.x, c0:a.c0, c:a.c0, mis:0, d24:0, evd:0, bk:[], base:a.base, v:v, hist:hist, done:{ vitals:false, bp:false, glu:false, checkin:false, exercise:false }, streak:0, estres:0, mode:'auto',
+      suit:{ state:'off', eva:false, linkUp:true }, wbuf:[], notif:[], ts:ts, nights:a.nights.slice(), hab:habNew(), fr:frNew(), shelter:false, noted:{}, coordOk:null, coordBase:0, coordMs:0, diary:[], dKey:null, dFlag:0, dLast:'', water:{ vol:2.1, ph:6.2, ca:180 } };
+  }
+  function astroSave(i) {
+    var t = RG.team[i], v = {}; Object.keys(S.v).forEach(function (k) { if (k !== 'rad') v[k] = S.v[k]; });
+    t.base = S.base; t.v = v; t.hist = S.hist; t.done = S.done; t.streak = S.streak; t.estres = S.estres; t.mode = S.mode;
+    t.suit = { state:SUIT.state, eva:SUIT.eva, linkUp:SUIT.linkUp }; t.wbuf = WBUF.splice(0); t.notif = NOTIF.splice(0);
+    t.ts = {}; TASKORDER.forEach(function (k) { var o = TS[k], c = {}; Object.keys(o).forEach(function (q) { c[q] = o[q]; }); t.ts[k] = c; });
+    t.c = RG.career; t.mis = RG.mission; t.bk = RG.bk; t.d24 = RG.d24; t.nights = RG.nights; t.hab = RG.hab; t.fr = RG.fr; t.shelter = RG.shelter; t.hx = RG.hx; t.faint = RG.faint; t.noted = RG.noted;
+    t.coordOk = RG.coordOk; t.coordBase = RG.coordBase; t.coordMs = RG.coordMs; t.diary = RG.diary; t.dKey = RG.dKey; t.dFlag = RG.dFlag; t.dLast = RG.dLast; t.water = RG.water;
+    t.evd = RG.spe ? (RG.spe.dose || 0) : 0;
+  }
+  function astroLoad(i) {
+    var t = RG.team[i];
+    S.base = t.base; Object.keys(t.v).forEach(function (k) { S.v[k] = t.v[k]; }); S.hist = t.hist; S.done = t.done; S.streak = t.streak; S.estres = t.estres; S.mode = t.mode;
+    SUIT.state = t.suit.state === 'sync' ? 'eva' : t.suit.state; SUIT.eva = t.suit.eva || t.suit.state === 'sync'; SUIT.linkUp = t.suit.linkUp; SUIT.flash = null;
+    t.wbuf.forEach(function (r) { WBUF.push(r); }); t.wbuf = [];
+    NOTIF.length = 0; t.notif.forEach(function (n) { NOTIF.push(n); }); t.notif = [];
+    TASKORDER.forEach(function (k) { TS[k] = t.ts[k]; });
+    RG.career = t.c; RG.mission = t.mis; RG.bk = t.bk; RG.nights = t.nights; RG.hab = t.hab; RG.fr = t.fr; RG.shelter = t.shelter; RG.hx = t.hx || hxNew(); RG.faint = !!t.faint; RG.noted = t.noted;
+    RG.coordOk = t.coordOk; RG.coordBase = t.coordBase; RG.coordMs = t.coordMs; RG.diary = t.diary; RG.dKey = t.dKey; RG.dFlag = t.dFlag; RG.dLast = t.dLast; RG.water = t.water;
+    RG.d24 = dose24(); if (RG.spe) RG.spe.dose = t.evd || 0;
+  }
+  function initTeam() {
+    RG.hab = habNew(); RG.fr = frNew(); RG.hx = hxNew(); RG.days = 90;
+    RG.team = AST0.map(function (a, i) { return i === 0 ? { n:a.n, role:a.r, age:a.age, hrv0:a.hrv0, x:a.x, c0:a.c0, evd:0 } : mkAst(a); });
+    S.base = AST0[0].base; RG.tens = {}; Object.keys(TENS0).forEach(function (k) { RG.tens[k] = TENS0[k]; });
+    astroSave(0); RG.team[0].suit = { state:'off', eva:false, linkUp:true };
+  }
+  function switchAstro(k) {
+    if (k === RG.sel || !RG.team[k]) return;
+    if (RG.sos) { RG.sos = null; $('sosOv').hidden = true; }
+    astroSave(RG.sel); RG.sel = k; astroLoad(k);
+    PREV = null; UNREADMSG = false; LASTN = {}; alSig2 = '';
+    try { syncInputs(); setMode(S.mode); } catch (e) {}
+    renderSuit(); renderWatch(true); render(); renderGround(); renderOnboard(); renderMbar(); buildRidge();
+  }
+  function astroUi() {
+    var el = $('astroSel'); if (!el || typeof RG === 'undefined' || !RG.team.length) return;
+    var h = RG.team.map(function (t, i) {
+      var act = i === RG.sel, src = act ? S.v : t.v, v = {}; Object.keys(src).forEach(function (q) { v[q] = src[q]; }); v.rad = S.v.rad;
+      var n = overall(levels(v, act ? S.base : t.base)).nivel, eva = act ? SUIT.eva : t.suit.eva;
+      return '<button type="button" class="ac' + (act ? ' on' : '') + '" data-ai="' + i + '" aria-pressed="' + act + '"><i class="dot ' + ['g', 'y', 'r'][n] + '"></i><b>' + t.n + '</b><small>' + qq(t.role[0], t.role[1]) + (eva ? ' · EVA' : '') + '</small></button>';
+    }).join('');
+    if (el._h !== h) { el._h = h; el.innerHTML = h; }
+    document.querySelectorAll('[data-i18n=statusH]').forEach(function (e) { var x = e.textContent.replace(/ASTRO-0\d/, an()); if (e.textContent !== x) e.textContent = x; });
+  }
+  initTeam();
+  function habPub(topic, payload, H) { H.msgs.unshift({ t:CLK.sim, topic:topic, payload:payload }); if (H.msgs.length > 6) H.msgs.pop(); }
+  function habStep(dt, H, act) {
+    var n = Math.max(1, Math.ceil(dt / 20)), i;
     for (i = 0; i < n; i++) {
       var d = dt / n, coef = 0.0002 + (H.fanCmd ? 0.0062 : 0), src = H.sleep ? H.src : 0, ex = H.sleep ? 0 : 0.006;
       H.head += (src - coef * (H.head - H.cab) - ex * (H.head - H.cab)) * d; H.head = Math.max(H.cab, Math.min(7000, H.head));
@@ -2670,14 +2914,14 @@ else if (typeof exports === 'object'){
         H.det = CLK.sim;
         if (H.auto) {
           H.ph = 'detected'; H.fanCmd = true; H.cct = 1800; H.temp = 20;
-          habPub('habitat/cabin2/fan', '{"speed":100,"mode":"sweep"}'); habPub('habitat/cabin2/light', '{"cct":1800,"lux":1}'); habPub('habitat/cabin2/temp', '{"set":20.0}');
-          decide(qq('Habitat: body signals match a CO2 pocket at the head. Fan sweep, amber light and a cooler room were sent automatically. The astronaut was not woken.', 'Hábitat: las señales del cuerpo coinciden con una bolsa de CO2 en la cabeza. Se enviaron solos el barrido del ventilador, luz ámbar y cuarto más fresco. No se despertó al astronauta.'));
+          habPub('habitat/cabin2/fan', '{"speed":100,"mode":"sweep"}', H); habPub('habitat/cabin2/light', '{"cct":1800,"lux":1}', H); habPub('habitat/cabin2/temp', '{"set":20.0}', H);
+          if (act) decide(qq('Habitat: body signals match a CO2 pocket at the head. Fan sweep, amber light and a cooler room were sent automatically. The astronaut was not woken.', 'Hábitat: las señales del cuerpo coinciden con una bolsa de CO2 en la cabeza. Se enviaron solos el barrido del ventilador, luz ámbar y cuarto más fresco. No se despertó al astronauta.'));
         }
       }
       if (H.sleep && H.head >= 5000 && H.ph !== 'esc') H.ph = 'esc';
       if (H.ph === 'detected' && H.head < H.cab + 400) {
-        H.ph = 'cleared'; H.fanCmd = false; H.sym = 0; habPub('habitat/cabin2/fan', '{"speed":20,"mode":"normal"}');
-        decide(qq('Habitat: the CO2 bubble is gone. Fan back to normal.', 'Hábitat: la burbuja de CO2 se fue. Ventilador de nuevo en modo normal.'));
+        H.ph = 'cleared'; H.fanCmd = false; H.sym = 0; habPub('habitat/cabin2/fan', '{"speed":20,"mode":"normal"}', H);
+        if (act) decide(qq('Habitat: the CO2 bubble is gone. Fan back to normal.', 'Hábitat: la burbuja de CO2 se fue. Ventilador de nuevo en modo normal.'));
       }
       if (H.ph === 'esc' && H.head < 3000) H.ph = 'idle';
       if (!H.sleep && H.fanCmd && H.head < H.cab + 200) H.fanCmd = false;
@@ -2724,8 +2968,84 @@ else if (typeof exports === 'object'){
   }
 
   /* ===== FRICCION SOCIAL: tension de convivencia, en privado ===== */
+  /* ===== CORAZON: pulso, ejercicio y adaptacion a la microgravedad (modelo simple del equipo) =====
+     FCmax = 220 - edad.  VO2max estimado = 15,3 x FCmax / FCreposo (Uth 2004).  Sin gravedad el corazon bombea menos sangre por latido (SV):
+     SV baja hasta 12 % con los dias en el espacio y el ejercicio frena esa perdida.  Gasto cardiaco en reposo = SV x pulso = 5 L/min, asi que el corazon "perezoso" late mas rapido. */
+  var HX_WORK = 600, HX_REC = 900;
+  function hxNew() { return { ph:'rest', t0:0, t1:0, rest:0, tgt:0, end:0, tau:150, rec1:null, hist:[] }; }
+  function hxOn() { return typeof RG !== 'undefined' && RG.hx && RG.hx.ph !== 'rest'; }
+  function hxAge() { return RG.team[RG.sel].age || 40; }
+  function hxMax() { return 220 - hxAge(); }
+  function hxSvf() { var loss = 0.12 * (1 - Math.exp(-(RG.days || 0) / 40)) * (1 - 0.6 * Math.min(1, S.v.ex / 120)); return 1 - loss; }
+  function hxRest() { return S.base.pulse / hxSvf(); }
+  function hxVo2() { return 15.3 * hxMax() / hxRest(); }
+  function hxWork() {                      // pulso por ejercicio, o null si esta en reposo
+    var H = RG.hx, dt, r;
+    if (H.ph === 'work') { dt = CLK.sim - H.t0; if (dt >= HX_WORK) { H.ph = 'rec'; H.t1 = H.t0 + HX_WORK; } else return H.rest + (H.tgt - H.rest) * (1 - Math.exp(-dt / 90)); }
+    if (H.ph === 'rec') { dt = CLK.sim - H.t1; if (dt >= HX_REC) { H.ph = 'rest'; return null; } if (dt >= 60 && H.rec1 === null) H.rec1 = Math.round((H.end - H.rest) * (1 - Math.exp(-60 / H.tau))); return H.rest + (H.end - H.rest) * Math.exp(-dt / H.tau); }
+    return null;
+  }
+  function hxStart() {
+    var H = RG.hx; if (H.ph === 'work') return;
+    var rest = hxRest(), tgt = rest + 0.65 * (hxMax() - rest);
+    RG.hx = RG.team[RG.sel].hx = { ph:'work', t0:CLK.sim, t1:0, rest:rest, tgt:tgt, end:rest + (tgt - rest) * (1 - Math.exp(-HX_WORK / 90)), tau:Math.max(90, Math.min(400, 5400 / hxVo2())), rec1:null, hist:H.hist };
+    if (S.mode !== 'auto') setMode('auto'); advance(); CLK.speed = 60; $('spd').value = '60';
+  }
+  function hrvNow() {
+    var H = RG.hx, b = RG.team[RG.sel].hrv0 || 60, v = b - S.estres * 0.25 - (sleepDebt() ? 12 : 0);
+    if (H.ph === 'work') v *= 0.35; else if (H.ph === 'rec') v *= 0.35 + 0.65 * (1 - Math.exp(-(CLK.sim - H.t1) / (H.tau * 2)));
+    return Math.max(8, Math.round(v));
+  }
+  function hxZone(hr) { var f = hr / hxMax(); return f < 0.5 ? 0 : (f < 0.7 ? 1 : (f < 0.85 ? 2 : 3)); }
+  function hxLvl() { var H = RG.hx; if (S.v.pulse > 0.9 * hxMax()) return 2; return (hxVo2() < 35 || (H.rec1 !== null && H.rec1 < 12)) ? 1 : 0; }
+  function hxSample() { var h = RG.hx.hist; h.push(Math.round(S.v.pulse)); if (h.length > 90) h.shift(); }
+  function hxUpd() {
+    if (!$('hx_bpm')) return;
+    var H = RG.hx, hr = Math.round(S.v.pulse), mx = hxMax(), z = hxZone(hr), svf = hxSvf(), sv0 = 5000 / S.base.pulse, frac = H.ph === 'rest' ? 0 : Math.max(0, Math.min(1, (hr - H.rest) / Math.max(1, H.tgt - H.rest)));
+    var sv = sv0 * svf * (1 + 0.25 * frac), co = sv * hr / 1000, vo2 = hxVo2(), hrv = hrvNow();
+    var zn = [qq('Resting', 'Reposo'), qq('Light', 'Suave'), qq('Moderate', 'Moderado'), qq('Intense', 'Intenso')][z];
+    var st = H.ph === 'work' ? qq('Exercising', 'Haciendo ejercicio') : (H.ph === 'rec' ? qq('Recovering', 'Recuperando') : zn);
+    $('hx_bpm').textContent = hr;
+    var d = (60 / Math.max(35, hr)).toFixed(2), hs = $('hx_heart'); if (hs._d !== d) { hs._d = d; hs.style.animationDuration = d + 's'; }
+    var zc = $('hx_zone'); zc.textContent = st; zc.className = 'hxz z' + (H.ph === 'rest' ? z : (z || 1));
+    var run = $('hx_run'); if (run) run.disabled = H.ph === 'work';
+    var hh = H.hist, n = hh.length, lo = 40, hi = mx + 8, pts = hh.map(function (q, i) { return (n < 2 ? 0 : i / (n - 1) * 300).toFixed(1) + ',' + (66 - (Math.min(hi, Math.max(lo, q)) - lo) / (hi - lo) * 60).toFixed(1); });
+    $('hx_line').setAttribute('d', n > 1 ? 'M' + pts.join(' L') : ''); $('hx_area').setAttribute('d', n > 1 ? 'M0,66 L' + pts.join(' L') + ' L300,66 Z' : '');
+    var yb = function (f) { return (66 - (mx * f - lo) / (hi - lo) * 60).toFixed(1); };
+    $('hx_b1').setAttribute('y', yb(0.85)); $('hx_b1').setAttribute('height', (yb(0.7) - yb(0.85)).toFixed(1)); $('hx_b2').setAttribute('y', yb(1)); $('hx_b2').setAttribute('height', (yb(0.85) - yb(1)).toFixed(1));
+    var vl = vo2 >= 45 ? qq('Very good', 'Muy bueno') : (vo2 >= 35 ? qq('Good', 'Bueno') : qq('Can improve', 'A mejorar'));
+    $('hx_vo2').textContent = vo2.toFixed(1); $('hx_vo2l').textContent = vl; $('hx_t1').className = 'hxt ' + (vo2 >= 35 ? 'ok' : 'warn');
+    $('hx_rec').textContent = H.rec1 === null ? '—' : H.rec1; $('hx_recl').textContent = H.rec1 === null ? (H.ph === 'rest' ? qq('Do the exercise to measure', 'Hacé el ejercicio para medirlo') : qq('Measuring…', 'Midiendo…')) : (H.rec1 >= 12 ? qq('Good recovery', 'Buena recuperación') : qq('Slow recovery', 'Recuperación lenta')); $('hx_t2').className = 'hxt ' + (H.rec1 === null ? '' : (H.rec1 >= 12 ? 'ok' : 'warn'));
+    $('hx_hrv').textContent = hrv; $('hx_hrvl').textContent = hrv >= 0.8 * (RG.team[RG.sel].hrv0 || 60) ? qq('Recovered', 'Recuperado') : qq('Tired or recovering', 'Cansado o recuperando'); $('hx_t3').className = 'hxt ' + (hrv >= 0.8 * (RG.team[RG.sel].hrv0 || 60) ? 'ok' : 'warn');
+    rset('hx_msg', '<span class="note">' + qq('Max pulse ' + mx + ' bpm (220 − age ' + hxAge() + '). Resting pulse in space: ' + Math.round(hxRest()) + ' bpm.', 'Pulso máximo ' + mx + ' lpm (220 − edad ' + hxAge() + '). Pulso en reposo en el espacio: ' + Math.round(hxRest()) + ' lpm.') + '</span>');
+    var e0 = sv0, pe = Math.round(sv / e0 * 100);
+    rset('hx_sv', '<div class="row"><span class="k">' + qq('Blood per beat on Earth', 'Sangre por latido en la Tierra') + '</span><b>' + Math.round(sv0) + ' mL</b></div>' + rbar(100, 0, 0) +
+      '<div class="row"><span class="k">' + qq('Blood per beat today (' + (RG.days || 0) + ' days up there)', 'Sangre por latido hoy (' + (RG.days || 0) + ' días allá arriba)') + '</span><b>' + Math.round(sv0 * svf) + ' mL</b></div>' + rbar(svf * 100, 0, svf < 0.93 ? 1 : 0) +
+      '<div class="row"><span class="k">' + qq('Blood pumped now', 'Sangre bombeada ahora') + '</span><b>' + co.toFixed(1) + ' L/min</b></div>' +
+      '<p class="note">' + (svf < 0.93 ? qq('The heart is getting lazy: each beat moves less blood. More exercise slows it down.', 'El corazón se está poniendo perezoso: cada latido mueve menos sangre. Más ejercicio lo frena.') : qq('Exercise is keeping the heart strong.', 'El ejercicio está manteniendo fuerte al corazón.')) + '</p>');
+    rset('rl_H', lvDot(hxLvl()));
+  }
+  function paneH() {
+    var nm = an();
+    return '<div class="card hxcard"><h2>' + qq('HEART · ' + nm, 'CORAZÓN · ' + nm) + '</h2>' +
+      '<div class="hxhero"><svg id="hx_heart" class="hxheart" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 84 C8 54 0 30 15 16 C28 4 44 9 50 23 C56 9 72 4 85 16 C100 30 92 54 50 84Z"/></svg>' +
+      '<div class="hxnum"><b id="hx_bpm">0</b><span>' + qq('beats per minute', 'latidos por minuto') + '</span><em id="hx_zone" class="hxz z0"></em></div>' +
+      '<div class="hxbtns"><button type="button" class="btn" id="hx_run" data-ra="hxrun">' + qq('🚴 Exercise 10 min', '🚴 Hacer ejercicio 10 min') + '</button><button type="button" class="btn ghost" data-ra="hxreset">' + qq('↺ Reset', '↺ Reiniciar') + '</button></div></div>' +
+      '<svg class="hxspark" viewBox="0 0 300 70" preserveAspectRatio="none" role="img" aria-label="' + qq('Pulse over time', 'Pulso en el tiempo') + '"><rect id="hx_b1" x="0" width="300" fill="rgba(230,161,0,.22)"/><rect id="hx_b2" x="0" width="300" fill="rgba(229,56,79,.22)"/><path id="hx_area" fill="rgba(229,56,79,.18)"/><path id="hx_line" fill="none" stroke="#E5384F" stroke-width="2.5" stroke-linejoin="round"/></svg>' +
+      '<div class="hxtiles"><div class="hxt" id="hx_t1"><small>' + qq('Estimated VO₂ max', 'VO₂ máx estimado') + '</small><b id="hx_vo2">0</b><span id="hx_vo2l"></span></div>' +
+      '<div class="hxt" id="hx_t2"><small>' + qq('Recovery in 1 min', 'Recuperación en 1 min') + '</small><b id="hx_rec">—</b><span id="hx_recl"></span></div>' +
+      '<div class="hxt" id="hx_t3"><small>HRV</small><b id="hx_hrv">0</b><span id="hx_hrvl"></span></div></div><div id="hx_msg"></div></div>' +
+      '<div class="card"><h2>' + qq('THE HEART IN SPACE', 'EL CORAZÓN EN EL ESPACIO') + '</h2>' + rsl('days', qq('Days in space', 'Días en el espacio'), 0, 180, 5, '') + rsl('S.v.ex', qq('Exercise minutes today', 'Minutos de ejercicio hoy'), 0, 180, 10, ' min') + '<div id="hx_sv"></div>' +
+      '<details class="radhow"><summary>' + qq('How is this calculated?', '¿Cómo se calcula?') + '</summary><ul>' +
+      '<li>' + qq('<b>Max pulse</b> = 220 − age. <b>VO₂ max</b> ≈ 15.3 × max pulse ÷ resting pulse (Uth, 2004). NASA measures it for real with a mask on the CEVIS bike; this is an estimate.', '<b>Pulso máximo</b> = 220 − edad. <b>VO₂ máx</b> ≈ 15,3 × pulso máximo ÷ pulso en reposo (Uth, 2004). La NASA lo mide de verdad con una máscara en la bicicleta CEVIS; esto es una estimación.') + '</li>' +
+      '<li>' + qq('<b>Recovery in 1 min</b> = how many beats the pulse drops in the first minute after exercise. Under 12 is considered slow (Cole, 1999).', '<b>Recuperación en 1 min</b> = cuántos latidos baja el pulso en el primer minuto después del ejercicio. Menos de 12 se considera lenta (Cole, 1999).') + '</li>' +
+      '<li>' + qq('<b>Blood per beat</b> = 5000 mL/min ÷ resting pulse. In space it drops up to 12% (team model, simplified) and exercise cuts that loss by up to 60%.', '<b>Sangre por latido</b> = 5000 mL/min ÷ pulso en reposo. En el espacio baja hasta 12% (modelo simplificado del equipo) y el ejercicio reduce esa pérdida hasta un 60%.') + '</li>' +
+      '<li>' + qq('<b>HRV</b> falls with stress and bad sleep, and drops during exercise. Exercise target: 65% of the gap between resting and max pulse. All numbers are simulated.', '<b>HRV</b> baja con el estrés y el mal sueño, y cae durante el ejercicio. Meta del ejercicio: 65% de la distancia entre el pulso en reposo y el máximo. Todos los números son simulados.') + '</li></ul></details></div>';
+  }
+  function frPartner() { var best = -1, bj = -1; RG.team.forEach(function (q, j) { if (j !== RG.sel) { var v = ten(RG.sel, j); if (v > best) { best = v; bj = j; } } }); return { j:bj, t:best, key:Math.min(RG.sel, bj) + '-' + Math.max(RG.sel, bj) }; }
   function frStep(dt) {
-    var F = RG.fr, raw = F.alone * 7 + F.stress * 5 + Math.max(0, 90 - F.together) * 0.5 - F.acts * 12; raw = Math.max(0, Math.min(100, raw));
+    var F = RG.fr; F.stress = Math.max(0, Math.round((frPartner().t - 40) / 8));      // cruces tensos por dia = (tension - 40) / 8
+    var raw = F.alone * 7 + F.stress * 5 + Math.max(0, 90 - F.together) * 0.5 - F.acts * 12; raw = Math.max(0, Math.min(100, raw));
     F.idx += (raw - F.idx) * (1 - Math.exp(-dt / 400));
     if (F.idx >= 35 && !F.sent) {
       F.sent = true;
@@ -2737,30 +3057,29 @@ else if (typeof exports === 'object'){
     if (F.idx < 20 && F.sent && F.acts > 0) { F.sent = false; F.plan = []; decide(qq('Crew: tension is back to normal. Plan closed.', 'Tripulación: la tensión volvió a lo normal. Plan cerrado.')); }
   }
   function frSvg(F) {
-    var st = F.stress > 0, w = 3 + F.stress * 1.1, aw = 1 + F.together / 28, col = F.idx >= 65 ? '#E5384F' : (F.idx >= 35 ? '#E6A100' : '#14A653');
-    return '<svg class="habsvg" viewBox="0 0 300 190" role="img" aria-label="' + qq('Crew map: four crewmates and the strength of their contact', 'Mapa de la tripulación: cuatro compañeros y la fuerza de su contacto') + '">' +
-      '<rect x="4" y="4" width="292" height="182" rx="18" fill="#EAF5FF" stroke="#0F1E4A" stroke-width="3"/>' +
-      '<g stroke-linecap="round"><path d="M80 50 L220 50" stroke="' + (st ? '#E5384F' : '#14A653') + '" stroke-width="' + w + '"/>' +
-      '<path d="M80 50 L220 140" stroke="#6B7DB0" stroke-width="' + aw + '" stroke-dasharray="' + (F.together < 60 ? '4 7' : '0') + '"/><path d="M80 50 L80 140" stroke="#6B7DB0" stroke-width="' + aw + '" stroke-dasharray="' + (F.together < 60 ? '4 7' : '0') + '"/>' +
-      '<path d="M220 50 L220 140" stroke="#14A653" stroke-width="4"/><path d="M220 50 L80 140" stroke="#14A653" stroke-width="4"/><path d="M80 140 L220 140" stroke="#14A653" stroke-width="4"/></g>' +
-      [['A', 80, 50], ['B', 220, 50], ['C', 220, 140], ['D', 80, 140]].map(function (n) { return '<g><circle cx="' + n[1] + '" cy="' + n[2] + '" r="22" fill="' + (n[0] === 'A' || n[0] === 'B' ? (F.idx >= 35 ? col : '#75AADB') : '#75AADB') + '" stroke="#0F1E4A" stroke-width="3"/><text x="' + n[1] + '" y="' + (n[2] + 6) + '" font-size="18" font-weight="800" text-anchor="middle" fill="#0F1E4A">' + n[0] + '</text></g>'; }).join('') +
-      '<text x="80" y="20" font-size="11" text-anchor="middle" fill="#0F1E4A">' + (F.alone > 0 ? qq('eats alone ×' + F.alone + ' d', 'come solo ×' + F.alone + ' d') : '') + '</text></svg>';
+    var P = [[80, 50], [220, 50], [220, 140], [80, 140]], me = RG.sel, col = F.idx >= 65 ? '#E5384F' : (F.idx >= 35 ? '#E6A100' : '#FFC21A'), e = '', a, b;
+    for (a = 0; a < 4; a++) for (b = a + 1; b < 4; b++) { var tn = ten(a, b); e += '<path d="M' + P[a][0] + ' ' + P[a][1] + ' L' + P[b][0] + ' ' + P[b][1] + '" stroke="' + (tn >= 60 ? '#E5384F' : (tn >= 40 ? '#E6A100' : '#14A653')) + '" stroke-width="' + (2 + tn / 12).toFixed(1) + '"' + ((a === me || b === me) && F.together < 60 ? ' stroke-dasharray="4 7"' : '') + '/>'; }
+    return '<svg class="habsvg" viewBox="0 0 300 190" role="img" aria-label="' + qq('Crew map: four crewmates and the tension between each pair', 'Mapa de la tripulación: cuatro compañeros y la tensión entre cada par') + '">' +
+      '<rect x="4" y="4" width="292" height="182" rx="18" fill="#EAF5FF" stroke="#0F1E4A" stroke-width="3"/><g stroke-linecap="round">' + e + '</g>' +
+      P.map(function (n, i) { return '<g><circle cx="' + n[0] + '" cy="' + n[1] + '" r="22" fill="' + (i === me ? col : '#75AADB') + '" stroke="#0F1E4A" stroke-width="' + (i === me ? 5 : 3) + '"/><text x="' + n[0] + '" y="' + (n[1] + 6) + '" font-size="16" font-weight="800" text-anchor="middle" fill="#0F1E4A">0' + (i + 1) + '</text></g>'; }).join('') +
+      '<text x="150" y="20" font-size="11" text-anchor="middle" fill="#0F1E4A">' + (F.alone > 0 ? RG.team[me].n + ': ' + qq('eats alone ×' + F.alone + ' d', 'come solo ×' + F.alone + ' d') : '') + '</text></svg>';
   }
   function frUpd() {
     var F = RG.fr; if (!$('o_fr')) return;
-    var lv = F.idx >= 65 ? 2 : (F.idx >= 35 ? 1 : 0), name = [qq('OK', 'Bien'), qq('Watch', 'Atención'), qq('Alert', 'Alerta')][lv];
+    var lv = F.idx >= 65 ? 2 : (F.idx >= 35 ? 1 : 0), name = [qq('OK', 'Bien'), qq('Watch', 'Atención'), qq('Alert', 'Alerta')][lv], A = an(), B = RG.team[frPartner().j].n;
     rset('o_fr', frSvg(F) + '<div class="row"><span class="k">' + qq('Tension index', 'Índice de tensión') + '</span><b>' + Math.round(F.idx) + ' / 100</b></div>' + rbar(F.idx, 35, lv) +
       '<div class="frcols"><div class="habmq"><b>' + qq('Stays on board only', 'Se queda solo a bordo') + '</b>' +
-      '<div>' + qq('A eats alone: ' + F.alone + ' days', 'A come solo: ' + F.alone + ' días') + '</div><div>' + qq('A shares ' + F.together + ' min a day with the crew', 'A comparte ' + F.together + ' min por día con el equipo') + '</div>' +
-      '<div>' + qq('A and B meet: pulse +' + (F.stress * 1.5).toFixed(0) + ' bpm, HRV −' + (F.stress * 3) + '% each time', 'A y B se cruzan: pulso +' + (F.stress * 1.5).toFixed(0) + ' lpm, HRV −' + (F.stress * 3) + '% cada vez') + '</div></div>' +
+      '<div>' + qq(A + ' eats alone: ' + F.alone + ' days', A + ' come solo: ' + F.alone + ' días') + '</div><div>' + qq(A + ' shares ' + F.together + ' min a day with the crew', A + ' comparte ' + F.together + ' min por día con el equipo') + '</div>' +
+      '<div>' + qq(A + ' and ' + B + ' meet: pulse +' + (F.stress * 1.5).toFixed(0) + ' bpm, HRV −' + (F.stress * 3) + '% each time', A + ' y ' + B + ' se cruzan: pulso +' + (F.stress * 1.5).toFixed(0) + ' lpm, HRV −' + (F.stress * 3) + '% cada vez') + '</div></div>' +
       '<div class="habmq"><b>' + qq('Earth receives (anonymous)', 'La Tierra recibe (anónimo)') + '</b><div>' + qq('Crew cohesion: ', 'Cohesión de la tripulación: ') + '<b>' + name + '</b></div><div class="note">' + qq('No names. No personal data.', 'Sin nombres. Sin datos personales.') + '</div></div></div>' +
       (F.plan.length ? '<div class="habmq"><b>' + qq('What the ship did', 'Qué hizo la nave') + '</b>' + F.plan.map(function (x) { return '<div>✔ ' + x + '</div>'; }).join('') + '</div>' : ''));
   }
   function paneFr() {
-    return '<div class="card"><h2>' + qq('CREW FRICTION · PRIVATE BY DESIGN', 'FRICCIÓN DE LA TRIPULACIÓN · PRIVADA POR DISEÑO') + '</h2><p class="note">' + qq('Everyone wears a wristband. The ship compares who shares meals and spaces, and whether meeting someone raises the pulse and lowers HRV. It never tells Earth who. It rearranges shifts and plans a calm shared activity.', 'Todos usan la pulsera. La nave compara quién comparte comidas y espacios, y si cruzarse con alguien sube el pulso y baja la HRV. Nunca le dice a la Tierra quién. Reorganiza turnos y programa una actividad tranquila en equipo.') + '</p>' +
-      rsl('fr.alone', qq('Days A eats alone', 'Días que A come solo'), 0, 7, 1, '') + rsl('fr.stress', qq('Tense A and B encounters per day', 'Cruces tensos de A y B por día'), 0, 10, 1, '') + rsl('fr.together', qq('Minutes a day A shares with the crew', 'Minutos por día que A comparte con el equipo'), 0, 120, 5, ' min') +
+    var pr = frPartner(), A = an(), B = RG.team[pr.j].n;
+    return '<div class="card"><h2>' + qq('CREW FRICTION · PRIVATE BY DESIGN', 'FRICCIÓN DE LA TRIPULACIÓN · PRIVADA POR DISEÑO') + '</h2><p class="note">' + qq('Everyone wears a wristband. The ship compares who shares meals and spaces, and whether meeting someone raises the pulse and lowers HRV. It never tells Earth who. It rearranges shifts and plans a calm shared activity. Viewing: ' + A + '.', 'Todos usan la pulsera. La nave compara quién comparte comidas y espacios, y si cruzarse con alguien sube el pulso y baja la HRV. Nunca le dice a la Tierra quién. Reorganiza turnos y programa una actividad tranquila en equipo. Viendo a: ' + A + '.') + '</p>' +
+      rsl('fr.alone', qq('Days ' + A + ' eats alone', 'Días que ' + A + ' come solo'), 0, 7, 1, '') + rsl('tens.' + pr.key, qq('Tension with ' + B + ' (the highest)', 'Tensión con ' + B + ' (la más alta)'), 0, 100, 1, '') + rsl('fr.together', qq('Minutes a day ' + A + ' shares with the crew', 'Minutos por día que ' + A + ' comparte con el equipo'), 0, 120, 5, ' min') +
       '<div class="scen">' + rbtn('fr4', qq('⏩ 4 tense days', '⏩ 4 días tensos')) + rbtn('fract', qq('🌱 Veggie garden together', '🌱 Huerta Veggie juntos'), true) + rbtn('frreset', qq('↺ Reset', '↺ Reiniciar'), true) + '</div>' +
-      '<div id="o_fr"></div><p class="note">' + qq('Simulation with invented numbers. The goal is care, not control: no individual data leaves the ship.', 'Simulación con números inventados. El objetivo es cuidar, no controlar: ningún dato individual sale de la nave.') + '</p></div>';
+      '<div id="o_fr"></div><p class="note">' + qq('Simulation with invented numbers. The tension is the same data the Task Planner uses to pick replacements. The goal is care, not control: no individual data leaves the ship.', 'Simulación con números inventados. La tensión es el mismo dato que usa el Planificador de tareas para elegir reemplazos. El objetivo es cuidar, no controlar: ningún dato individual sale de la nave.') + '</p></div>';
   }
 
   /* ---- acciones de los botones ---- */
@@ -2775,13 +3094,13 @@ else if (typeof exports === 'object'){
   }
   try { var dk0 = JSON.parse(localStorage.getItem('bc2-donki') || 'null'); if (dk0 && dk0.ev) { dk0.st = 'cache'; RG.donki = dk0; } } catch (e) {}
   function raAct(a, d) {
-    if (a === 'spe') { RG.spe = { ph:'warn', arrive:CLK.sim + 30 * 60, peak:6500 }; RG.noted.spe = 0; beep(2); }
+    if (a === 'spe') { RG.faint = false; RG.spe = { ph:'warn', arrive:CLK.sim + 30 * 60, peak:6500 }; RG.noted.spe = 0; beep(2); }
     else if (a === 'pulse') $('dPulse').click();
-    else if (a === 'calm') { RG.spe = null; RG.shelter = false; RG.mission = 0; RG.bk = []; RG.career = 300; RG.noted = {}; RG.dec = []; RG.decN = 0; if (RG.sos) sosEnd(); $('dNorm').click(); S.v.rad = 10; syncInputs(); }
+    else if (a === 'calm') { RG.spe = null; RG.shelter = false; RG.mission = 0; RG.bk = []; RG.career = RG.team[RG.sel].c0; RG.noted = {}; RG.dec = []; RG.decN = 0; if (RG.sos) sosEnd(); $('dNorm').click(); S.v.rad = 10; syncInputs(); }
     else if (a === 'donki') return donkiLoad();
     else if (a === 'replay') { var e0 = RG.donki.ev[+d.i], pk = flarePeak(e0.c); if (pk < 1200) { decide(qq('NASA DONKI flare ' + e0.c + ': too weak to start a particle storm. Logged only.', 'Fulguración NASA DONKI ' + e0.c + ': muy débil para iniciar una tormenta de partículas. Solo se registra.')); } else { RG.spe = { ph:'warn', arrive:CLK.sim + 30 * 60, peak:pk, src:e0.c + ' ' + (e0.id || '') }; RG.noted.spe = 0; beep(2); } }
-    else if (a === 'shelter') RG.shelter = !RG.shelter;
-    else if (a === 'radreset') { RG.spe = null; RG.shelter = false; RG.mission = 0; RG.bk = []; S.v.rad = 10; syncInputs(); }
+    else if (a === 'shelter') { if (RG.faint) return; RG.shelter = !RG.shelter; }
+    else if (a === 'radreset') { RG.faint = false; RG.spe = null; RG.shelter = false; RG.mission = 0; RG.bk = []; S.v.rad = 10; syncInputs(); }
     else if (a === 'sos') sosStart();
     else if (a === 'vr') RG.vr = { t0:CLK.sim };
     else if (a === 'snd') soundOn(!RG.snd);
@@ -2791,15 +3110,18 @@ else if (typeof exports === 'object'){
     else if (a === 'pvt') { goTab('ta2'); rtStart(); var c = $('procCard'); if (c && c.scrollIntoView) c.scrollIntoView({ block:'center' }); }
     else if (a === 'coord') { goTab('ta2'); coordStart(); var c2 = $('procCard'); if (c2 && c2.scrollIntoView) c2.scrollIntoView({ block:'center' }); }
     else if (a === 'more') RG.more = !RG.more;
+    else if (a === 'pick') { switchAstro(+d.i); return; }
     else if (a === 'hsleep') { var H1 = RG.hab; H1.sleep = !H1.sleep; if (!H1.sleep) { H1.fanCmd = true; H1.ph = 'idle'; H1.sym = 0; H1.cct = 3000; H1.temp = 21.5; } }
     else if (a === 'hauto') RG.hab.auto = !RG.hab.auto;
-    else if (a === 'hreset') RG.hab = habNew();
-    else if (a === 'night') { RG.hab = habNew(); RG.hab.sleep = true; RG.pane = 'E'; goG('tgR'); CLK.speed = 120; $('spd').value = '120'; }
-    else if (a === 'crew') { RG.fr = frNew(); RG.pane = 'I'; goG('tgR'); CLK.speed = 120; $('spd').value = '120'; RG.fr.alone = 4; RG.fr.stress = 6; RG.fr.together = 25; }
-    else if (a === 'fr4') { RG.fr.alone = 4; RG.fr.stress = 6; RG.fr.together = 25; }
-    else if (a === 'fract') { RG.fr.acts++; RG.fr.alone = Math.max(0, RG.fr.alone - 1); RG.fr.stress = Math.max(0, RG.fr.stress - 2); RG.fr.together = Math.min(120, RG.fr.together + 30); }
-    else if (a === 'frreset') RG.fr = frNew();
-    if (a === 'calm') { RG.hab = habNew(); RG.fr = frNew(); }
+    else if (a === 'hreset') setHab(habNew());
+    else if (a === 'night') { setHab(habNew()); RG.hab.sleep = true; RG.pane = 'E'; goG('tgR'); CLK.speed = 120; $('spd').value = '120'; }
+    else if (a === 'crew') { setFr(frNew()); RG.pane = 'I'; goG('tgR'); CLK.speed = 120; $('spd').value = '120'; RG.fr.alone = 4; RG.fr.together = 25; RG.tens[frPartner().key] = 88; }
+    else if (a === 'fr4') { RG.fr.alone = 4; RG.fr.together = 25; RG.tens[frPartner().key] = 88; }
+    else if (a === 'fract') { var kk0 = frPartner().key; RG.fr.acts++; RG.fr.alone = Math.max(0, RG.fr.alone - 1); RG.tens[kk0] = Math.max(0, RG.tens[kk0] - 14); RG.fr.together = Math.min(120, RG.fr.together + 30); }
+    else if (a === 'hxrun') hxStart();
+    else if (a === 'hxreset') RG.hx = RG.team[RG.sel].hx = hxNew();
+    else if (a === 'frreset') { setFr(frNew()); Object.keys(TENS0).forEach(function (k) { RG.tens[k] = TENS0[k]; }); }
+    if (a === 'calm') { RG.faint = false; RG.hx = hxNew(); RG.team.forEach(function (q, j) { q.faint = false; q.hx = j === RG.sel ? RG.hx : hxNew(); q.mis = 0; q.bk = []; q.d24 = 0; q.evd = 0; if (j !== RG.sel) { q.c = q.c0; q.hab = habNew(); q.fr = frNew(); q.shelter = false; q.noted = {}; } }); setHab(habNew()); setFr(frNew()); Object.keys(TENS0).forEach(function (k) { RG.tens[k] = TENS0[k]; }); }
     ridgeStep(); buildRidge();
   }
   function soundOn(on) {
@@ -2817,11 +3139,11 @@ else if (typeof exports === 'object'){
     RG.sos = { t:CLK.sim };
     $('sosOv').hidden = false; sosBuild();
     notify({ type:'alert', sev:2, title:'SOS', body:qq('Emergency button pressed. Offline clinical guide opened.', 'Botón de emergencia presionado. Guía clínica offline abierta.') });
-    sendMsg('toGround', qq('SOS from ASTRO-01. Emergency pressed. The onboard guide is already guiding the crew.', 'SOS de ASTRO-01. Emergencia activada. La guía de a bordo ya está guiando a la tripulación.'));
+    sendMsg('toGround', qq('SOS from ' + an() + '. Emergency pressed. The onboard guide is already guiding the crew.', 'SOS de ' + an() + '. Emergencia activada. La guía de a bordo ya está guiando a la tripulación.'));
     decide(qq('SOS: clinical guide shown instantly. Earth would answer no sooner than ' + Math.round(CLK.delay / 60 * 2) + ' min.', 'SOS: guía clínica mostrada al instante. La Tierra respondería recién en ' + Math.round(CLK.delay / 60 * 2) + ' min.'));
     renderWatch(true);
   }
-  function sosEnd() { RG.sos = null; $('sosOv').hidden = true; sendMsg('toGround', qq('SOS closed by ASTRO-01.', 'SOS cerrado por ASTRO-01.')); renderWatch(true); }
+  function sosEnd() { RG.sos = null; $('sosOv').hidden = true; sendMsg('toGround', qq('SOS closed by ' + an() + '.', 'SOS cerrado por ' + an() + '.')); renderWatch(true); }
   function sosBuild() {
     var g = GUIDE[RG.sosSel], L = S.lang === 'es' ? 'es' : 'en';
     $('sosBox').innerHTML = '<div class="sosh"><b>SOS</b><span>' + qq('Emergency active. The crew is guided now, without waiting for Earth.', 'Emergencia activa. La tripulación recibe guía ahora, sin esperar a la Tierra.') + '</span></div>' +
@@ -2903,24 +3225,29 @@ else if (typeof exports === 'object'){
     if (extra) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn ghost morebtn'; b.setAttribute('data-ra', 'more'); b.textContent = RG.more ? qq('Show less ▴', 'Ver menos ▴') : qq('Show more ▾', 'Ver más ▾'); body.appendChild(b); }
   }
   function buildRidge() {
-    var sub = [['ov', qq('OVERVIEW', 'RESUMEN')], ['R', qq('RADIATION', 'RADIACIÓN')], ['I', qq('ISOLATION', 'AISLAMIENTO')], ['D', qq('DISTANCE', 'DISTANCIA')], ['G', qq('GRAVITY', 'GRAVEDAD')], ['E', qq('ENVIRONMENT', 'ENTORNO')]];
+    var sub = [['ov', qq('OVERVIEW', 'RESUMEN')], ['R', qq('RADIATION', 'RADIACIÓN')], ['I', qq('ISOLATION', 'AISLAMIENTO')], ['D', qq('DISTANCE', 'DISTANCIA')], ['G', qq('GRAVITY', 'GRAVEDAD')], ['E', qq('ENVIRONMENT', 'ENTORNO')], ['H', qq('HEART', 'CORAZÓN')]];
     $('rSub').innerHTML = sub.map(function (s) { return '<button type="button" data-rp="' + s[0] + '" aria-pressed="' + (RG.pane === s[0]) + '">' + (s[0] === 'ov' ? '' : '<span id="rl_' + s[0] + '"></span>') + s[1] + '</button>'; }).join('');
-    var P = { ov:paneOv, R:paneR, I:paneI, D:paneD, G:paneG, E:paneE }[RG.pane];
+    var P = { ov:paneOv, R:paneR, I:paneI, D:paneD, G:paneG, E:paneE, H:paneH }[RG.pane];
     $('rBody').innerHTML = P(); simplify(); diaryBuild(); if (RG.sos) sosBuild(); rUpd(true);
   }
   function paneOv() {
     return '<div id="o_hero"></div><div class="card"><h2>' + qq('RADIATION DOSE · TOTAL', 'DOSIS DE RADIACIÓN · TOTAL') + '</h2><div class="dosebig"><span id="o_dm">0</span> mSv <small>' + qq('this mission', 'esta misión') + '</small> &nbsp;·&nbsp; <span id="o_dc">0</span> / 600 mSv <small>' + qq('career total', 'total de carrera') + '</small></div><div id="o_dbar"></div><p class="note">' + qq('Career limit 600 mSv. At 75% (450 mSv) EVAs are reassigned. Dose numbers are simulated.', 'Límite de carrera 600 mSv. Al 75% (450 mSv) se reasignan las EVA. Los valores de dosis son simulados.') + '</p></div>' +
       '<div class="rchips" id="o_chips"></div>' +
-      '<div class="card"><h2>' + qq('DYNAMIC TASK PLANNER', 'PLANIFICADOR DINÁMICO DE TAREAS') + '</h2><p class="note">' + qq('Tasks move to a crewmate with a lower radiation budget used or more rest when ASTRO-01 is blocked.', 'Las tareas pasan a un compañero con menor presupuesto de radiación usado o más descansado cuando ASTRO-01 está bloqueado.') + '</p><div id="o_plan"></div><div id="o_crew"></div></div>';
+      '<div class="card"><h2>' + qq('DYNAMIC TASK PLANNER', 'PLANIFICADOR DINÁMICO DE TAREAS') + '</h2><p class="note">' + qq('Pick an astronaut: their wristband, suit and every module switch to them. Their dose, sleep and relationships come from the other modules (Radiation, Isolation); blocked tasks move to the crewmate with the lowest dose and the least tension.', 'Elegí un astronauta: su pulsera, su traje y todos los módulos pasan a ser los suyos. Su dosis, sueño y relaciones vienen de los otros módulos (Radiación, Aislamiento); las tareas bloqueadas pasan al compañero con menos dosis y menos tensión.') + '</p>' +
+      '<div class="crewpick">' + RG.team.map(function (t, k) { return '<button type="button" class="btn rpick" data-ra="pick" data-i="' + k + '" aria-pressed="' + (RG.sel === k) + '">' + t.n + '</button>'; }).join('') + '</div>' +
+      '<div id="o_plan"></div><div id="o_crew"></div></div>';
   }
   function paneR() {
-    return '<div class="grid2"><div class="card"><h2>' + qq('DOSE & EARLY WARNING', 'DOSIS Y ALERTA TEMPRANA') + '</h2>' +
-      '<div class="dosebig"><span id="o_dm">0</span> mSv <small>' + qq('mission', 'misión') + '</small></div><div class="row"><span class="k">' + qq('Dose rate', 'Tasa de dosis') + '</span><b id="o_rate"></b></div>' +
-      '<div class="row"><span class="k">' + qq('Last 24 h', 'Últimas 24 h') + '</span><b id="o_d24"></b></div><div id="o_d24b"></div>' +
-      '<div class="row"><span class="k">' + qq('Career', 'Carrera') + '</span><b id="o_dc"></b></div><div id="o_dbar"></div>' +
-      rbtn('spe', qq('☀ Simulate solar flare (X-ray precursor)', '☀ Simular fulguración solar (precursor de rayos X)')) + ' ' + rbtn('shelter', qq('Astronaut in Storm Shelter: ', 'Astronauta en Storm Shelter: ') + (RG.shelter ? 'ON' : 'OFF'), true) + ' ' + rbtn('radreset', qq('Reset dose', 'Reiniciar dosis'), true) +
-      '<p class="note">' + qq('The X-ray precursor gives 15 to 60 min of warning before the energetic protons arrive. The red alert asks to go to the Storm Shelter and closes by itself when the dose rate falls under the danger threshold.', 'El precursor de rayos X da entre 15 y 60 min de aviso antes de que lleguen los protones energéticos. La alerta roja pide ir al Storm Shelter y se cierra sola cuando la tasa de dosis baja del umbral de peligro.') + '</p></div>' +
-      '<div class="card"><h2>' + qq('SETTINGS (SIMULATION)', 'AJUSTES (SIMULACIÓN)') + '</h2>' + rsl('S.v.rad', qq('Radiation index', 'Índice de radiación'), 0, 100, 1, '%') + rsl('career', qq('Career dose before', 'Dosis de carrera previa'), 0, 600, 5, ' mSv') + rsl('cap', qq('Daily cap', 'Tope diario'), 1, 10, 0.5, ' mSv') +
+    return '<div class="grid2"><div class="card"><h2>' + qq('RADIATION', 'RADIACIÓN') + '</h2><div id="o_rad"></div>' +
+      rsl('S.v.rad', qq('Simulate radiation level', 'Simular nivel de radiación'), 0, 100, 1, '%') +
+      '<div class="scen">' + rbtn('spe', qq('☀ Solar storm', '☀ Tormenta solar')) + ' ' + rbtn('shelter', qq('Shelter: ', 'Refugio: ') + (RG.shelter ? 'ON' : 'OFF'), true) + ' ' + rbtn('radreset', qq('Reset', 'Reiniciar'), true) + '</div>' +
+      '<details class="radhow"><summary>' + qq('How is this calculated?', '¿Cómo se calcula?') + '</summary><ul>' +
+      '<li>' + qq('<b>Limits (NASA-STD-3001):</b> 600 mSv for a whole career and 250 mSv for one solar particle event.', '<b>Límites (NASA-STD-3001):</b> 600 mSv en toda la carrera y 250 mSv por cada evento de partículas solares.') + '</li>' +
+      '<li>' + qq('<b>Normal level:</b> 10% = 85 µSv/h = 2.0 mSv/day. Real value measured by Curiosity’s RAD on the way to Mars: 1.84 mSv/day.', '<b>Nivel normal:</b> 10% = 85 µSv/h = 2,0 mSv/día. Valor real medido por el sensor RAD de Curiosity camino a Marte: 1,84 mSv/día.') + '</li>' +
+      '<li>' + qq('<b>Time until a limit</b> = (limit − dose so far) ÷ current rate. The shelter cuts the rate to 10%. It uses the nearest of: daily cap, career limit and storm limit.', '<b>Tiempo hasta un límite</b> = (límite − dosis acumulada) ÷ tasa actual. El refugio baja la tasa al 10%. Usa el más cercano entre tope diario, límite de carrera y límite de la tormenta.') + '</li>' +
+      '<li>' + qq('<b>Big storms:</b> NOAA counts about 10 storms of level S3 or more per 11-year solar cycle. That is 10 ÷ (11 × 365.25) = 0.0025 per day, one every ~13 months. Chance in t days = 1 − e^(−0.0025 × t). It is an average, not a forecast.', '<b>Tormentas grandes:</b> NOAA cuenta unas 10 tormentas de nivel S3 o más por ciclo solar de 11 años. Eso es 10 ÷ (11 × 365,25) = 0,0025 por día, una cada ~13 meses. Chance en t días = 1 − e^(−0,0025 × t). Es un promedio, no un pronóstico.') + '</li>' +
+      '<li>' + qq('<b>Warning:</b> the shelter takes ' + (REACH / 60) + ' min to reach (team example), so safe time = time to the particles − ' + (REACH / 60) + ' min.', '<b>Aviso:</b> llegar al refugio toma ' + (REACH / 60) + ' min (ejemplo del equipo), así que el tiempo seguro = tiempo hasta las partículas − ' + (REACH / 60) + ' min.') + '</li></ul></details></div>' +
+      '<div class="card"><h2>' + qq('SETTINGS (SIMULATION)', 'AJUSTES (SIMULACIÓN)') + '</h2>' + rsl('career', qq('Career dose before', 'Dosis de carrera previa'), 0, 600, 5, ' mSv') + rsl('cap', qq('Daily cap', 'Tope diario'), 1, 10, 0.5, ' mSv') +
       '<p class="note">' + qq('The index is logarithmic: 0% is about 50 µSv/h and 100% about 10,000 µSv/h. Caps and shelter factor are team examples.', 'El índice es logarítmico: 0% son unos 50 µSv/h y 100% unos 10.000 µSv/h. Los topes y el factor del refugio son ejemplos del equipo.') + '</p></div></div>' +
       '<div class="card"><h2>' + qq('NASA SPACE WEATHER · DONKI (OPTIONAL)', 'CLIMA ESPACIAL NASA · DONKI (OPCIONAL)') + '</h2><div id="o_donki"></div></div>' +
       '<div class="grid2"><div class="card"><h2>' + qq('ANTIOXIDANT NUTRITION PROTOCOL', 'PROTOCOLO NUTRICIONAL ANTIOXIDANTE') + '</h2><div id="o_nut"></div></div>' +
@@ -2955,7 +3282,7 @@ else if (typeof exports === 'object'){
 
   /* ---- actualizar valores en pantalla ---- */
   function rUpd(force) {
-    habUpd(); frUpd();
+    habUpd(); frUpd(); radUpd(); hxUpd();
     var tot = RG.career + RG.mission, pct = tot / 6, d24 = RG.d24, L = levels(S.v, S.base), eva = SUIT.eva;
     var lvPct = pct >= 100 ? 2 : (pct >= 75 ? 1 : 0), lv24 = d24 >= RG.cap * 1.5 ? 2 : (d24 >= RG.cap ? 1 : 0);
     ['R', 'I', 'D', 'G', 'E'].forEach(function (m) { rset('rl_' + m, lvDot(RG.lv[m])); });
@@ -2968,9 +3295,10 @@ else if (typeof exports === 'object'){
     // chips
     rset('o_chips', ['R', 'I', 'D', 'G', 'E'].map(function (m) { var n = RG.lv[m]; return '<button type="button" class="rchip l' + n + '" data-rp="' + m + '">' + lvDot(n) + '<b>' + m + '</b><span>' + modName(m) + '</span></button>'; }).join(''));
     // planificador
-    rset('o_plan', '<div class="scroll"><table class="sm"><thead><tr><th>' + qq('Task', 'Tarea') + '</th><th>ASTRO-01</th><th>' + qq('Assigned to', 'Asignada a') + '</th></tr></thead><tbody>' + RG.plan.map(function (p) {
-      return '<tr><td>' + esc(p.n) + '</td><td>' + (p.ok ? '<b class="g">OK</b>' : '<b class="r">' + qq('BLOCKED', 'BLOQUEADA') + '</b><br><small>' + esc(p.why) + '</small>') + '</td><td>' + (p.ok ? 'ASTRO-01' : (p.who ? '→ ' + esc(p.who) : qq('Postponed', 'Pospuesta'))) + '</td></tr>'; }).join('') + '</tbody></table></div>');
-    rset('o_crew', '<div class="crew">' + [{ n:'ASTRO-01', c:tot }].concat(RG.crew).map(function (c) { var p = c.c / 6; return '<div class="row"><span class="k">' + c.n + (c.rest === false ? ' <small>(' + qq('tired', 'cansado') + ')</small>' : '') + '</span><div style="flex:1">' + rbar(p, 75, p >= 100 ? 2 : (p >= 75 ? 1 : 0)) + '</div><span class="vv">' + Math.round(p) + '%</span></div>'; }).join('') + '</div>');
+    var LL = levels(S.v, S.base), meN = RG.team[RG.sel].n;
+    rset('o_plan', '<div class="scroll"><table class="sm"><thead><tr><th>' + qq('Task', 'Tarea') + '</th><th>' + meN + '</th><th>' + qq('Assigned to', 'Asignada a') + '</th></tr></thead><tbody>' + RG.plan.map(function (p) {
+      return '<tr><td>' + esc(p.n) + '</td><td>' + (p.ok ? '<b class="g">OK</b>' : '<b class="r">' + qq('BLOCKED', 'BLOQUEADA') + '</b><br><small>' + esc(p.why) + '</small>') + '</td><td>' + (p.ok ? meN : (p.who ? '→ ' + esc(p.who) + ' <button type="button" class="btn gob" data-ra="pick" data-i="' + p.wi + '" title="' + qq('See their wristband and suit', 'Ver su pulsera y su traje') + '">▸</button>' : qq('Postponed', 'Pospuesta'))) + '</td></tr>'; }).join('') + '</tbody></table></div>');
+    rset('o_crew', '<div class="crew">' + [0, 1, 2, 3].map(function (k) { var c = mem(k, LL), p = c.p; return '<div class="row' + (k === RG.sel ? ' selrow' : '') + '"><span class="k">' + c.n + (c.tired ? ' <small>(' + qq('tired', 'cansado') + ')</small>' : '') + (c.eva ? ' <small>EVA</small>' : '') + '</span><div style="flex:1">' + rbar(p, 75, p >= 100 ? 2 : (p >= 75 ? 1 : 0)) + '</div><span class="vv">' + Math.round(p) + '%</span></div>'; }).join('') + '</div>');
     var dk = RG.donki, dh = '';
     if (!dk) dh = '<p class="note">' + qq('Load real solar flares from NASA DONKI (needs internet). Press it once while online: the last result is kept for offline use.', 'Cargá fulguraciones solares reales de NASA DONKI (necesita internet). Presionalo una vez con conexión: el último resultado queda guardado para usar sin internet.') + '</p>';
     else {
@@ -2994,7 +3322,7 @@ else if (typeof exports === 'object'){
     var h = (CLK.sim % SOL) / 3600, lt = lightAt(h), col = RG.sos ? 'rgb(255,40,40)' : kRGB(lt.k);
     rset('o_light', '<div class="swatch" style="background:' + col + ';opacity:' + (RG.sos ? 1 : Math.max(0.15, lt.i / 100)) + '"></div><div class="lgrad"><i style="left:' + (h / 24.66 * 100).toFixed(1) + '%"></i></div><p class="mono">' + (RG.sos ? qq('EMERGENCY LIGHTS: red', 'LUCES DE EMERGENCIA: rojo') : lt.k + ' K · ' + lt.i + '%') + ' · ' + qq('sol hour', 'hora del sol') + ' ' + h.toFixed(1) + ' / 24.7</p><p class="note">' + esc(lightPhase(h)) + '</p>');
     var debt = sleepDebt();
-    rset('o_sleep', '<div class="row"><span class="k">HRV</span><b>' + Math.round(62 - S.estres * 0.25 - (debt ? 12 : 0)) + ' ms</b></div><div class="row"><span class="k">' + qq('Skin temp.', 'Temp. periférica') + '</span><b>' + (33.2 + (S.v.temp - 36.6)).toFixed(1) + ' °C</b></div><div class="row"><span class="k">' + qq('Workload', 'Carga de trabajo') + '</span><div style="flex:1">' + rbar(debt ? 70 : 100, 0, debt ? 1 : 0) + '</div><span class="vv">' + (debt ? '70%' : '100%') + '</span></div><p class="note">' + (debt ? qq('Two nights under 6 h: tasks redistributed, nap suggested, cabin lights dimmed.', 'Dos noches con menos de 6 h: tareas redistribuidas, siesta sugerida y luces de cabina atenuadas.') : qq('Sleep is on track. HRV and temperature are simulated from the wearable.', 'El sueño va bien. HRV y temperatura son simulados desde el wearable.')) + '</p>');
+    rset('o_sleep', '<div class="row"><span class="k">HRV</span><b>' + hrvNow() + ' ms</b></div><div class="row"><span class="k">' + qq('Skin temp.', 'Temp. periférica') + '</span><b>' + (33.2 + (S.v.temp - 36.6)).toFixed(1) + ' °C</b></div><div class="row"><span class="k">' + qq('Workload', 'Carga de trabajo') + '</span><div style="flex:1">' + rbar(debt ? 70 : 100, 0, debt ? 1 : 0) + '</div><span class="vv">' + (debt ? '70%' : '100%') + '</span></div><p class="note">' + (debt ? qq('Two nights under 6 h: tasks redistributed, nap suggested, cabin lights dimmed.', 'Dos noches con menos de 6 h: tareas redistribuidas, siesta sugerida y luces de cabina atenuadas.') : qq('Sleep is on track. HRV and temperature are simulated from the wearable.', 'El sueño va bien. HRV y temperatura son simulados desde el wearable.')) + '</p>');
     rset('o_pvt', '<p>' + (S.v.react > 0 && S.rtBase > 0 ? qq('Last: ', 'Último: ') + Math.round(S.v.react) + ' ms · ' + qq('baseline ', 'base ') + Math.round(S.rtBase) + ' ms ' + lvDot(L.react) : qq('No test yet. The first one sets your baseline.', 'Todavía no hay test. El primero fija tu línea base.')) + '</p><p class="note">' + (L.react > 0 ? qq('Fatigue alert: high-risk tasks (robotic maneuvers, docking, electrical work) are blocked and reassigned.', 'Alerta de fatiga: las tareas de alto riesgo (maniobras robóticas, acoplamientos, trabajo eléctrico) se bloquean y reasignan.') : qq('Under 5 minutes, once a day. If you are slower than your baseline, high-risk tasks are handed over.', 'Menos de 5 minutos, una vez al día. Si estás más lento que tu línea base, las tareas de alto riesgo se reasignan.')) + '</p>');
     rset('o_dia', '<p>' + qq('Entries stored: ', 'Entradas guardadas: ') + RG.diary.length + ' · ' + qq('Earth sees: nothing', 'La Tierra ve: nada') + '</p><p class="note">' + qq('Only a flag without text, if the astronaut chooses to send it. The diary lives on the astronaut tablet.', 'Solo una alerta sin texto, si el astronauta decide enviarla. El diario vive en la tablet del astronauta.') + '</p>' + (RG.dFlag > 0 ? '<p>' + lvDot(RG.dFlag) + qq('Local analysis: stress signs', 'Análisis local: señales de estrés') + '</p>' : ''));
     rset('o_noise', '<p class="note">' + (RG.noise.cab > 45 ? '🔇 ' + qq('Active noise cancelling ON in the rest cabin.', 'Cancelación activa de ruido ENCENDIDA en la cabina de descanso.') : qq('Rest cabin noise is fine.', 'El ruido de la cabina de descanso está bien.')) + ' ' + (RG.noise.com > 45 ? '🌧 ' + qq('Nature soundscape ON in the common area.', 'Paisaje sonoro natural ENCENDIDO en el área común.') : '') + '</p>');
@@ -3036,7 +3364,7 @@ else if (typeof exports === 'object'){
       diaryOut(); ridgeStep(); render(); }); }
     else if (id === 'diOpen') diaryOpen().then(function (x) { var o = $('diOut'); if (o) o.innerHTML = x ? '<q>' + esc(x) + '</q>' : qq('No entries yet.', 'Todavía no hay entradas.'); });
     else if (id === 'diBreath') { goTab('ta2'); wAct('menu', { k:'breath' }); var c = $('procCard'); if (c && c.scrollIntoView) c.scrollIntoView({ block:'center' }); }
-    else if (id === 'diFlag') { sendMsg('toGround', qq('Confidential well-being flag from ASTRO-01 (no content). Please check in privately.', 'Alerta confidencial de bienestar de ASTRO-01 (sin contenido). Por favor, contactá en privado.')); e.target.textContent = qq('Sent', 'Enviada'); e.target.disabled = true; }
+    else if (id === 'diFlag') { sendMsg('toGround', qq('Confidential well-being flag from ' + an() + ' (no content). Please check in privately.', 'Alerta confidencial de bienestar de ' + an() + ' (sin contenido). Por favor, contactá en privado.')); e.target.textContent = qq('Sent', 'Enviada'); e.target.disabled = true; }
   });
   $('tgR').addEventListener('input', function (e) {
     var el = e.target; if (!el.dataset.rs) return; var x = parseFloat(el.value); rput(el.dataset.rs, x);
